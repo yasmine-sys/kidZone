@@ -39,6 +39,8 @@ public class Trajet {
 	private Long longeur_trajet;
 	@Column(name="duree_trajet")
 	private String duree_trajet;
+	@Column(name="heure_depart")
+	private String heure_depart;
 	
 	/*@ManyToMany(mappedBy="trajets", cascade = CascadeType.ALL)
 	private Set<Bus> bus;*/

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -39,14 +40,17 @@ public class Bus {
 	/*@ManyToOne
 	Enfant enfant;*/
 	
-	@ManyToMany(mappedBy="buus", cascade = CascadeType.ALL)
-	private Set<Trajet> trajets;
-	
 	/*@ManyToMany(cascade = CascadeType.ALL)
 	private Set<Trajet> trajets;*/
 	
+	@ManyToMany(mappedBy="buus", cascade = CascadeType.ALL)
+	private Set<Trajet> trajets;
+		
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="buss")
 	private Set<InscriBus> InscriBus;
+	
+	@ManyToOne
+	User users;
 //chauffeur
 	
 }
