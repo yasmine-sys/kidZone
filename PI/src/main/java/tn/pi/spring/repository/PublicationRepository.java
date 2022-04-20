@@ -27,7 +27,7 @@ public List<Publication> searchEvent(@Param("word") String word);
 	*/
 	
 	//nb des publications
-		@Query(value="SELECT count(*) from publication", nativeQuery =true)
+	/*	@Query(value="SELECT count(*) from publication", nativeQuery =true)
 		public int countPublication();
 		
 		@Query("SELECT c FROM Commentaire c WHERE c.publication.publicationId=:id")

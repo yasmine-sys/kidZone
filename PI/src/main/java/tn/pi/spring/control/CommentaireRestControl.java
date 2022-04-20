@@ -14,7 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import tn.pi.spring.entity.Commentaire;
+
+import tn.pi.spring.entity.LikeCommentaire;
+
+import tn.pi.spring.repository.CommentaireRepository;
+
 import tn.pi.spring.services.CommentaireService;
+
 
 @RestController
 @RequestMapping("/commentaire")
@@ -24,6 +30,10 @@ public class CommentaireRestControl
 
 	@Autowired
 	CommentaireService comentaireService;
+	
+	
+	@Autowired
+	CommentaireRepository com_rep;
 
 	// URL : http://localhost:8081/SpringMVC/commentaire/retrieve-all-commentaires
 	@GetMapping("/retrieve-all-commentaires")
@@ -33,11 +43,41 @@ public class CommentaireRestControl
 		return list ;
 	}
 
-	@PostMapping("/add-commentaire")
+	/*@PostMapping("/add-commentaire")
 	public Commentaire addCommentaire(@RequestBody Commentaire p) 
 	{
 		return comentaireService.addCommentaire(p);
 	}
+*/
+	
+	
+	@PostMapping("/AddComments/{userId}/{pubId}")
+	public String AddCommentaire(@RequestBody Commentaire com,@PathVariable(value = "userId") int userId,@PathVariable(value = "pubId") int pubId){
+		comentaireService.AddComments(userId, com, pubId);
+					return "comments added succesfully";
+
+	}
+	@PostMapping("AddLikesComments/{userId}/{comId}")
+	public void AddLikeCom(@PathVariable("userId")int user_id,@PathVariable("comId")int comId,LikeCommentaire like){
+		comentaireService.AddLikesComments(like, user_id, comId);
+	}
+	@PostMapping("AddloveComments/{userId}/{comId}")
+	public void AddloveCom(@PathVariable("userId")int user_id,@PathVariable("comId")int comId,LikeCommentaire like){
+		comentaireService.AddloveComments(like, user_id, comId);
+	}
+	@PostMapping("AddhahaComments/{userId}/{comId}")
+	public void AddHahaCom(@PathVariable("userId")int user_id,@PathVariable("comId")int comId,LikeCommentaire like){
+		comentaireService.AddHahaComments(like, user_id, comId);
+	}
+	@PostMapping("AddsadComments/{userId}/{comId}")
+	public void AddsadCom(@PathVariable("userId")int user_id,@PathVariable("comId")int comId,LikeCommentaire like){
+		comentaireService.AddSadComments(like, user_id, comId);
+	}
+	@PostMapping("AddangryComments/{userId}/{comId}")
+	public void AddangryCom(@PathVariable("userId")int user_id,@PathVariable("comId")int comId,LikeCommentaire like){
+		comentaireService.AddAngryComments(like, user_id, comId);
+	}
+	
 
 
 	@PutMapping("/modify-commentaire")

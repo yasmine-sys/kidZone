@@ -11,17 +11,18 @@ import tn.pi.spring.entity.Publication;
 public interface PublicationService {
 	
 	List<Publication>retrievAllPublications();
-	Publication addPublication(Publication c);
-	void deletePublication(Long id);
-	Publication updatePublication(Publication c);
-	Publication retrievePublication(Long id);
-	public int getNombrePublicationJPQL();
+	public String AddPublication(int user_id,Publication pub) throws Exception;
+	public List<Publication> RetrievePublication();
+	public void UpdatePublicationById(Publication pub, int id);
+	public void DeletePublication(int id);
+	public Publication GetPubById(int pubId);
+	/*public int getNombrePublicationJPQL();
 	List<Commentaire> findCommentaire(Long id);
 	List<Publication> getAllPublications();
 	List <Publication> retrieveAllPublicationswithSorting( String filed);
 	List<Publication> searchPublicationByDate(Date date);
 	Page<Publication> findPublicationWithPagination(int offset, int pageSize);
-	//List<Publication> getPublicationsByUser(Long idUser);
+	//List<Publication> getPublicationsByUser(Long idUser);*/
 
 
 }
