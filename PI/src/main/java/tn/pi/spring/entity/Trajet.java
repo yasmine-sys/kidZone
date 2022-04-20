@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,6 +47,7 @@ public class Trajet {
 	/*@ManyToMany(mappedBy="trajets", cascade = CascadeType.ALL)
 	private Set<Bus> bus;*/
 	
+	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<Bus> buus;
 	

@@ -6,5 +6,5 @@ import tn.pi.spring.entity.Bus;
 
 @Repository
 public interface BusRepository extends CrudRepository<Bus,Long>{
-
+		
 }

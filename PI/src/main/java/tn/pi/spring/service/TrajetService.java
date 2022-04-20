@@ -2,12 +2,15 @@ package tn.pi.spring.service;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
+import tn.pi.spring.entity.Bus;
 import tn.pi.spring.entity.Trajet;
 import tn.pi.spring.iservice.Itrajet;
+import tn.pi.spring.repository.BusRepository;
 import tn.pi.spring.repository.TrajetRepository;
 
 @Service 
@@ -15,7 +18,9 @@ import tn.pi.spring.repository.TrajetRepository;
 public class TrajetService implements Itrajet{
 	@Autowired
 	TrajetRepository trajetRepository;
-
+	@Autowired
+	BusRepository busRepository;
+	
 	@Override
 	public List<Trajet> retrieveAllTrajet() {
 		List<Trajet> trajets = (List<Trajet>) trajetRepository.findAll();
@@ -26,7 +31,9 @@ public class TrajetService implements Itrajet{
 	}
 
 	@Override
-	public Trajet addTrajet(Trajet t) {
+	public Trajet addTrajet(Trajet t,Long idBus ) {
+		Bus bus = busRepository.findById(idBus).orElse(null);
+		t.getBuus().add(bus);
 		log.info("In method addTrajet");
 		return trajetRepository.save(t);
 	}
@@ -48,6 +55,11 @@ public class TrajetService implements Itrajet{
 	public Trajet retrieveTrajet(Long id) {
 		Trajet trajet = trajetRepository.findById(id).orElse(null);
 		return trajet;
+	}
+
+	@Override
+	public List<Trajet> retrieveTrajetByLongeurTrajet(Long l) {
+		return(List<Trajet>)trajetRepository.retrieveTrajetByLongeurTrajet(l);
 	}
 
 }

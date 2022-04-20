@@ -21,7 +21,7 @@ public class TrajetRestController {
 	@Autowired
 	Itrajet trajetService;
 
-	// http://localhost:8089/SpringMVC/trajet/retrieve-all-trajets
+	// http://localhost:8085/SpringMVC/trajet/retrieve-all-trajets
 	@GetMapping("/retrieve-all-trajets")
 	@ResponseBody
 	public List<Trajet> getTrajets() {
@@ -32,7 +32,7 @@ public class TrajetRestController {
 		return list;
 	}
 
-	// http://localhost:8089/SpringMVC/trajet/retrieve-trajet/8
+	// http://localhost:8085/SpringMVC/trajet/retrieve-trajet/8
 	@GetMapping("/retrieve-trajet/{trajet-id}")
 	@ResponseBody
 	public Trajet retrieveTrajet(@PathVariable("trajet-id") Long trajetId) {
@@ -40,25 +40,34 @@ public class TrajetRestController {
 		return trajetService.retrieveTrajet(trajetId);
 	}
 
-	// http://localhost:8089/SpringMVC/trajet/add-trajet
+	// http://localhost:8085/SpringMVC/trajet/add-trajet
 	@PostMapping("/add-trajet")
 	@ResponseBody
-	public Trajet addTrajet(@RequestBody Trajet t) {
-		Trajet trajet = trajetService.addTrajet(t);
+	public Trajet addTrajet(@RequestBody Trajet t, Long idBus) {
+		Trajet trajet = trajetService.addTrajet(t,idBus );
 		return trajet;
 	}
 
-	// http://localhost:8089/SpringMVC/trajet/remove-trajet/{trajet-id}
+	// http://localhost:8085/SpringMVC/trajet/remove-trajet/{trajet-id}
 	@DeleteMapping("/remove-trajet/{trajet-id}")
 	@ResponseBody
 	public void removeTrajet(@PathVariable("trajet-id") Long trajetId) {
 		trajetService.deleteTrajet(trajetId);
 	}
 
-	// http://localhost:8089/SpringMVC/trajet/modify-trajet
+	// http://localhost:8085/SpringMVC/trajet/modify-trajet
 	@PutMapping("/modify-trajet")
 	@ResponseBody
 	public Trajet modifyTrajet(@RequestBody Trajet trajet) {
 		return trajetService.updateTrajet(trajet);
 }
+	
+	//affichage des trajets par longueur de trajet  
+	 //http://localhost:8085/SpringMVC/trajet/retrieveTrajetByLongeurTrajet/{longeur_trajet}
+	@GetMapping("/retrieveTrajetByLongeurTrajet/{longeur_trajet}")
+	@ResponseBody
+	
+	public List<Trajet> retrieveTrajetByLongeurTrajet(@PathVariable("longeur_trajet") Long longeur_trajet) {
+		return trajetService.retrieveTrajetByLongeurTrajet(longeur_trajet);
+	}
 }

@@ -50,4 +50,19 @@ public class InscriBusService implements IinscriBus{
 		return inscriBus;
 	}
 
+	@Override
+	public List<InscriBus> getEnfantsByBus(Long idBus) {
+		return (List<InscriBus>) inscriBusRepository.getEnfantsByBus(idBus);
+	}
+
+	@Override
+	public int getNombreEnfantsInscriJPQL() {
+		return inscriBusRepository.getNombreEnfantsInscriJPQL();
+	}
+
+	@Override
+	public int getNombreEnfantsInscriByBusJPQL(Long idBus) {
+		return inscriBusRepository.getNombreEnfantsInscriByBusJPQL(idBus);
+	}
+
 }

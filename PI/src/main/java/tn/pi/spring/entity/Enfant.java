@@ -11,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,6 +47,7 @@ public class Enfant {
 	/*@OneToMany (cascade = CascadeType.ALL, mappedBy = "bus")
 	private Set<Bus> buss;*/
 	
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="enfants")
 	private Set<InscriBus> InscriBus;
 	

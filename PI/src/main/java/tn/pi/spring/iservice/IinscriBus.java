@@ -14,4 +14,10 @@ public interface IinscriBus {
 	InscriBus updateInscriBus (InscriBus i);
 
 	InscriBus retrieveInscriBus (Long id);
+	
+	List<InscriBus> getEnfantsByBus(Long idBus);
+	
+	public int getNombreEnfantsInscriJPQL();
+	
+	public int getNombreEnfantsInscriByBusJPQL(Long idBus);
 }

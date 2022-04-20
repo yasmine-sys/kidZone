@@ -57,7 +57,7 @@ public class BusRestController {
 			busService.deleteBus(busId);
 		}
 
-		// http://localhost:8089/SpringMVC/bus/modify-bus
+		// http://localhost:8085/SpringMVC/bus/modify-bus
 		@PutMapping("/modify-bus")
 		@ResponseBody
 		public Bus modifyBus(@RequestBody Bus bus) {

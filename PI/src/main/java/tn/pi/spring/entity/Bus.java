@@ -12,6 +12,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,10 +45,11 @@ public class Bus {
 	
 	/*@ManyToMany(cascade = CascadeType.ALL)
 	private Set<Trajet> trajets;*/
-	
+	@JsonIgnore
 	@ManyToMany(mappedBy="buus", cascade = CascadeType.ALL)
 	private Set<Trajet> trajets;
-		
+	
+	@JsonIgnore	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="buss")
 	private Set<InscriBus> InscriBus;
 	
