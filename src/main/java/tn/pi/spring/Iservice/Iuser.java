@@ -18,10 +18,8 @@ public interface Iuser {
 	User updateUser (User u);
 
 	User retrieveUser (Long id);
-	//Stream<RoleName> getAllRolesStream();
-
-	//List<User> getParents(RoleName role);
-	//List<User> getJardinEnfant(RoleName role);
-	//List<User> findByRoles();
+	
+	List<User> getJardinEnfant(RoleName role);
+	List<Object[]> countTotalUsersByNom();
 
 }
