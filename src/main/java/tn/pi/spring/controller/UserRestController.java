@@ -3,6 +3,7 @@ package tn.pi.spring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,13 +19,13 @@ import tn.pi.spring.entity.RoleName;
 import tn.pi.spring.entity.User;
 
 @RestController
-@RequestMapping("/user")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserRestController {
 
 	@Autowired
 	Iuser userService;
 	
-	@GetMapping("/retrieve-all-users")
+	@GetMapping("/users")
 	@ResponseBody
 	public List<User> getusers() {
 		System.out.println("ggggg");
@@ -43,9 +44,9 @@ public class UserRestController {
 		}
 		
 		// http://localhost:8089/SpringMVC/evenement/add-evenement
-		@PostMapping("/add-user")
+		@PostMapping("/users")
 		@ResponseBody
-		public User adduUser(@RequestBody User u) {
+		public User addUser(@RequestBody User u) {
 			User user = userService.addUser(u);
 			return user;
 		}
@@ -64,27 +65,18 @@ public class UserRestController {
 			return userService.updateUser(user);
 		}
 		
-		
-		
-		// http://localhost:8089/SpringMVC/evenement/modify-evenement
-			/*	@GetMapping("/Role-jradin-enfant")
+		@GetMapping("/Role/{role}")
 		@ResponseBody
-		public User getJardinEnfant( @PathVariable("user-id")RoleName role) {
-			return (User) userService.getJardinEnfant(role);
+		public List<User> getJardinEnfant( @PathVariable("role")RoleName role) {
+			System.out.println("done");
+			 List<User> list=userService.getJardinEnfant(role);
+			return  list;
+			
 		}
 		
-		@PutMapping("/Role-parent")
-				@ResponseBody
-				public User getParents(@RequestBody RoleName role) {
-					return (User) userService.getParents(role);
-				}
-				
-				
-
-				@PutMapping("/all-roles")
-				@ResponseBody
-				public User getAllRolesStream() {
-					return (User) userService.getAllRolesStream();
-				}*/
-
+		@GetMapping("/countTotalUsersByRole")
+		@ResponseBody
+		public List<Object[]> countTotalUsersByNom(){
+			return userService.countTotalUsersByNom();
+		}
 }

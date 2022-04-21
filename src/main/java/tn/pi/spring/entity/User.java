@@ -1,6 +1,8 @@
 package tn.pi.spring.entity;
 
 import java.io.Serializable;
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,20 +28,26 @@ public class User implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@JsonIgnore
 	private Long id;
 	
-	@Column(name="Prenom")
-	private String Prenom;
+	@Column(name="prenom", nullable=true,length = 64)
+	private String prenom;
 
-	@Column(name="nom")
+	@Column(name="nom",nullable=true,length = 64)
 	private String nom;
 	
-	@Column(name="Description")
-	private String Description;
+	@Column(name="description", nullable=true,length = 64 )
+	private String description;
+	
+	@Column(name="adress",nullable=true,length = 64 )
+	private String adress;
 
-	@Column(name="logo")
-	private String logo;
+	@Column(name="telephone",nullable=true,length = 64 )
+	private String telephone;
+	
+	@Column(name="datecreation",nullable=true,length = 64 )
+	private Date datecreation;
 	
 	@Column(name="mail")
 	private String mail;
@@ -47,24 +57,105 @@ public class User implements Serializable{
 
 	@Enumerated (EnumType.STRING) 
 	private RoleName role;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	///////////////////////////////Constucteur////////////////////////////////////////
 
-	public User(Long id, String prenom, String nom, String description, String logo, String mail, String passwd,
-			RoleName role) {
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+		
+	
+	}
+
+	public User(Long id, String nom, String description, String adress, String telephone, Date datecreation,
+			String mail, String passwd, RoleName role) {
 		super();
 		this.id = id;
-		Prenom = prenom;
 		this.nom = nom;
-		Description = description;
-		this.logo = logo;
+		this.description = description;
+		this.adress = adress;
+		this.telephone = telephone;
+		this.datecreation = datecreation;
 		this.mail = mail;
 		this.passwd = passwd;
 		this.role = role;
 	}
 
-	public User() {
+	public User(Long id, String prenom, String nom, String adress, String telephone, String mail, String passwd,
+			RoleName role) {
 		super();
-		// TODO Auto-generated constructor stub
+		this.id = id;
+		this.prenom = prenom;
+		this.nom = nom;
+		this.adress = adress;
+		this.telephone = telephone;
+		this.mail = mail;
+		this.passwd = passwd;
+		this.role = role;
 	}
-	
-	
+
+	public User(String prenom, String nom, String adress, String telephone, String mail, String passwd, RoleName role) {
+		super();
+		this.prenom = prenom;
+		this.nom = nom;
+		this.adress = adress;
+		this.telephone = telephone;
+		this.mail = mail;
+		this.passwd = passwd;
+		this.role = role;
+	}
+
+	public User(String nom, String description, String adress, String telephone, Date datecreation, String mail,
+			String passwd, RoleName role) {
+		super();
+		this.nom = nom;
+		this.description = description;
+		this.adress = adress;
+		this.telephone = telephone;
+		this.datecreation = datecreation;
+		this.mail = mail;
+		this.passwd = passwd;
+		this.role = role;
+	}
 }

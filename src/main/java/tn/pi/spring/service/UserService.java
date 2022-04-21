@@ -53,10 +53,16 @@ public class UserService implements Iuser {
 	}
 
 	
-	//@Override
-	//public List<User> getJardinEnfant(RoleName role) {
-		//return (List<User>) userRepository.getJardinEnfant(role);
-	//}
+	@Override
+	public List<User> getJardinEnfant(RoleName role) {
+		return (List<User>) userRepository.getJardinEnfant(role);
+		
+	}
+	
+	@Override
+	public List<Object[]> countTotalUsersByNom() {
+		return userRepository.countTotalUsersByNom();
+	}
 	
 	
 }
