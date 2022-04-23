@@ -1,5 +1,6 @@
 package tn.pi.spring.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,6 +21,10 @@ public interface AppUserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Query("UPDATE User a " + "SET a.enabled = TRUE WHERE a.email = ?1")
     int enableAppUser(String email);
+	
+	 
+    List<User> findByFirstNameContains(String firstName);
+
     
 }
 

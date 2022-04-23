@@ -17,6 +17,7 @@ import tn.pi.spring.registration.token.ConfirmationTokenService;
 import tn.pi.spring.repository.AppUserRepository;
 import tn.pi.spring.service.AppUserService;
 
+
 @Service
 @AllArgsConstructor
 public class RegistrationService {
@@ -44,14 +45,18 @@ public class RegistrationService {
 					new User (
 							request.getFirstName(),
 							request.getLastName(),
+							request.getDescription(),
+							request.getAdress(),
+							request.getTelephone(),
+							LocalDateTime.now(),
 							request.getEmail(),
 							request.getPassword(),
-							RoleName.USER)
+							request.getRole())
 					);
 		String link="http://localhost:8089/SpringMVC/registration/confirm?token="+ token;
 		emailSender.send(
 				request.getEmail(), 
-				buildEmail(request.getLastName(), link));		
+				buildEmail(request.getFirstName(), link));		
 		return token;
 		
 	}
