@@ -26,7 +26,7 @@ import tn.pi.spring.repository.BlacklistRepository;
 public class AppUserService implements UserDetailsService {
 
 	
-	private final static String USER_NOT_FOUND_MSG = "user with email %email not found";
+	private final static String USER_NOT_FOUND_MSG = "user with email %s not found";
     private final AppUserRepository appUserRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
@@ -34,7 +34,6 @@ public class AppUserService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
 		return appUserRepository.findByEmail(email)
 				.orElseThrow(()-> new UsernameNotFoundException(
 						String.format(USER_NOT_FOUND_MSG, email)));
