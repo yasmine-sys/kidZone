@@ -3,6 +3,7 @@ package tn.pi.spring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,69 +15,54 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.pi.spring.Iservice.Iuser;
+import io.swagger.annotations.Api;
+import tn.pi.spring.Iservice.IuserManagement;
 import tn.pi.spring.entity.RoleName;
 import tn.pi.spring.entity.User;
 
 @RestController
+@Api(tags = "User management")
+@RequestMapping("/user")
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserRestController {
 
 	@Autowired
-	Iuser userService;
+	IuserManagement userService;
 	
-	@GetMapping("/users")
+	@GetMapping("/findByEmail/{email}")
 	@ResponseBody
-	public List<User> getusers() {
-		System.out.println("ggggg");
-		
-		List<User> list = userService.retrieveAllUsers();
-		System.out.println(list);
-		return list;
+	public User findByEmail(@PathVariable("email") String email){
+		return userService.findByEmail(email);
 	}
 	
 	// http://localhost:8089/SpringMVC/evenement/retrieve-evenement/8
-		@GetMapping("/retrieve-user/{user-id}")
-		@ResponseBody
-		public User retrieveEvenement(@PathVariable("user-id") Long userId) {
+	@GetMapping("/getUsers")
+	@ResponseBody
+	public ResponseEntity<List<User>> getUsers(){
+		return ResponseEntity.ok().body(userService.getUsers());
 		
-			return userService.retrieveUser(userId);
-		}
+	}
 		
 		// http://localhost:8089/SpringMVC/evenement/add-evenement
-		@PostMapping("/users")
-		@ResponseBody
-		public User addUser(@RequestBody User u) {
-			User user = userService.addUser(u);
-			return user;
-		}
+	@DeleteMapping("/deleteUser/{email}")
+	@ResponseBody
+	public void deleteUser(@PathVariable("email") String email){
+		userService.deleteUser(email);
+		
+	}
 
 		// http://localhost:8089/SpringMVC/evenement/remove-evenement/{evenement-id}
-		@DeleteMapping("/remove-user/{user-id}")
-		@ResponseBody
-		public void removeuser(@PathVariable("user-id") Long userId) {
-			userService.deleteUser(userId);
-		}
+	@PutMapping("/updateUser")
+	@ResponseBody
+	public void updateUser(@RequestBody User user) {
+	userService.updateUser(user);
+	}
 
 		// http://localhost:8089/SpringMVC/evenement/modify-evenement
-		@PutMapping("/modify-user")
-		@ResponseBody
-		public User modifyuser(@RequestBody User user) {
-			return userService.updateUser(user);
-		}
+	@GetMapping("/findByFirstNameContains/{firstName}")
+	@ResponseBody
+	public List<User> findByFirstNameContains(@PathVariable("firstName") String firstName){
+		return userService.findByFirstNameContains(firstName);
+	}
 		
-		@GetMapping("/Role/{role}")
-		@ResponseBody
-		public List<User> getJardinEnfant( @PathVariable("role")RoleName role) {
-			System.out.println("done");
-			 List<User> list=userService.getJardinEnfant(role);
-			return  list;
-			
-		}
-		
-		@GetMapping("/countTotalUsersByRole")
-		@ResponseBody
-		public List<Object[]> countTotalUsersByNom(){
-			return userService.countTotalUsersByNom();
-		}
 }

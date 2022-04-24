@@ -1,9 +1,10 @@
 package tn.pi.spring.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,26 +45,26 @@ public class User implements UserDetails, Serializable{
             strategy = GenerationType.SEQUENCE,
             generator = "user_sequence"
     )
-	@JsonIgnore
+	
 	private Long id;
 	
 	@Column(name="firstName", nullable=true,length = 64)
 	private String firstName;
 
-	@Column(name="lastName",nullable=true,length = 64)
+	@Column(name="lastName", nullable=true,length = 64)
 	private String lastName;
 	
 	@Column(name="description", nullable=true )
 	private String description;
 	
-	@Column(name="adress",nullable=true,length = 64 )
+	@Column(name="adress", nullable=true,length = 64 )
 	private String adress;
 
-	@Column(name="telephone",nullable=true,length = 64 )
+	@Column(name="telephone", nullable=true,length = 64 )
 	private String telephone;
 	
-	@Column(name="datecreation",nullable=true,length = 64 )
-	private Date datecreation;
+	@Column(name="datecreation", nullable=true,length = 64 )
+	private LocalDateTime datecreation;
 	
 	@Column(name="email")
 	private String email;
@@ -86,43 +87,49 @@ public class User implements UserDetails, Serializable{
 	        return Collections.singletonList(authority);
 	    }
 
+	@JsonIgnore
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
 		return password;
 	}
 
+	@JsonIgnore
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
 		return email;
 	}
 
+	@JsonIgnore
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
 		return true;
 	}
 
+	@JsonIgnore
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
 		return !locked;
 	}
 
+	@JsonIgnore
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
+	@JsonIgnore
     @Override
     public boolean isEnabled() {
         return enabled;
     }
 
 	public User(String fisrtName, String lastName, String description, String adress, String telephone,
-			Date datecreation, String email, String password, RoleName role, boolean locked, boolean enabled) {
+			LocalDateTime datecreation, String email, String password, RoleName role) {
 		super();
 		this.firstName = fisrtName;
 		this.lastName = lastName;
@@ -133,11 +140,10 @@ public class User implements UserDetails, Serializable{
 		this.email = email;
 		this.password = password;
 		this.role = role;
-		this.locked = locked;
-		this.enabled = enabled;
+		
 	}
 
-	public User(String fisrtName, String description, String adress, String telephone, Date datecreation,
+	public User(String fisrtName, String description, String adress, String telephone, LocalDateTime datecreation,
 			String email, String password, RoleName role, boolean locked, boolean enabled) {
 		super();
 		this.password = fisrtName;
@@ -186,7 +192,7 @@ public class User implements UserDetails, Serializable{
 		this.role = role;
 	}
 
-	public User(String fisrtName, String description, String adress, String telephone, Date datecreation, String email,
+	public User(String fisrtName, String description, String adress, String telephone, LocalDateTime datecreation, String email,
 			String password, RoleName role) {
 		super();
 		this.lastName = fisrtName;
@@ -268,11 +274,11 @@ public class User implements UserDetails, Serializable{
 		this.telephone = telephone;
 	}
 
-	public Date getDatecreation() {
+	public LocalDateTime getDatecreation() {
 		return datecreation;
 	}
 
-	public void setDatecreation(Date datecreation) {
+	public void setDatecreation(LocalDateTime datecreation) {
 		this.datecreation = datecreation;
 	}
 

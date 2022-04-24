@@ -1,68 +1,48 @@
 package tn.pi.spring.service;
 
 import java.util.List;
-import java.util.stream.Stream;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import lombok.extern.slf4j.Slf4j;
-import tn.pi.spring.Iservice.Iuser;
-import tn.pi.spring.entity.RoleName;
+import tn.pi.spring.Iservice.IuserManagement;
 import tn.pi.spring.entity.User;
-import tn.pi.spring.repository.UserRepository;
-
-
+import tn.pi.spring.repository.AppUserRepository;
 @Service
-@Slf4j
-public class UserService implements Iuser {
+public class UserService implements IuserManagement {
 	
 	@Autowired 
-	UserRepository userRepository;
+	AppUserRepository myRepository;
 
 	@Override
-	public List<User> retrieveAllUsers() {
-		List<User> listUser = (List<User>) userRepository.findAll();
-		return listUser;	
-		}
+	public List<User> getUsers() {
+		return myRepository.findAll(Sort.by(Sort.Direction.DESC, "firstName"));
 
-	@Override
-	public User addUser(User u) {
-		// TODO Auto-generated method stub
-		return userRepository.save(u);
 	}
 
 	@Override
-	public void deleteUser(Long id) {
-		// TODO Auto-generated method stub
-		userRepository.deleteById(id);
+	public User findByEmail(String email) {
+		return myRepository.findByEmail(email).orElse(null);
 	}
 
 	@Override
-	public User updateUser(User u) {
-		// TODO Auto-generated method stub
-		return userRepository.save(u);
-	}
-
-	@Override
-	public User retrieveUser(Long id) {
-		// TODO Auto-generated method stub
-		 User user = userRepository.findById(id).orElse(null);
-			
-			return user;
-	}
-
-	
-	@Override
-	public List<User> getJardinEnfant(RoleName role) {
-		return (List<User>) userRepository.getJardinEnfant(role);
+	public void deleteUser(String email) {
+		User u = myRepository.findByEmail(email).orElse(null);
+		myRepository.delete(u);
 		
 	}
-	
+
 	@Override
-	public List<Object[]> countTotalUsersByNom() {
-		return userRepository.countTotalUsersByNom();
+	public void updateUser(User user) {
+		 myRepository.save(user);
+		
 	}
+
+	@Override
+	public List<User> findByFirstNameContains(String firstName) {
+		return myRepository.findByFirstNameContains(firstName);
+	}
+
+	
 	
 	
 }

@@ -1,6 +1,7 @@
 package tn.pi.spring.registration;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import javax.transaction.Transactional;
 
@@ -10,12 +11,15 @@ import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 import tn.pi.spring.email.EmailSender;
-import tn.pi.spring.entity.RoleName;
 import tn.pi.spring.entity.User;
 import tn.pi.spring.registration.token.ConfirmationToken;
 import tn.pi.spring.registration.token.ConfirmationTokenService;
+import tn.pi.spring.registration.token.PasswordTokenRepository;
+import tn.pi.spring.registration.token.PasswordTokenService;
+import tn.pi.spring.registration.token.ResetPasswordToken;
 import tn.pi.spring.repository.AppUserRepository;
 import tn.pi.spring.service.AppUserService;
+
 
 @Service
 @AllArgsConstructor
@@ -24,37 +28,99 @@ public class RegistrationService {
     private final AppUserService appUserService;
     private final EmailValidator emailValidator;
     private final ConfirmationTokenService confirmationTokenService;
-    //private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final PasswordTokenService passwordTokenService;
     private final EmailSender emailSender;
 
     @Autowired
     AppUserRepository userRepo;
+    @Autowired
+    PasswordTokenRepository passwordTokenRepository;
     
 
 	public String register(RegistrationRequest request) {
 
 		 boolean isValidEmail = emailValidator.test(request.getEmail());
 
+		 String token ="";
 		 if (!isValidEmail) {
-			 throw new IllegalStateException("email not found");
+			 return"email not found";
 		 }
 
-		String token = appUserService.signUpUser(
+		 token = appUserService.signUpUser(
 
 					new User (
 							request.getFirstName(),
 							request.getLastName(),
+							request.getDescription(),
+							request.getAdress(),
+							request.getTelephone(),
+							LocalDateTime.now(),
 							request.getEmail(),
 							request.getPassword(),
-							RoleName.USER)
+							request.getRole())
 					);
 		String link="http://localhost:8089/SpringMVC/registration/confirm?token="+ token;
 		emailSender.send(
 				request.getEmail(), 
-				buildEmail(request.getLastName(), link));		
+				buildEmail(request.getFirstName(), link));		
 		return token;
-		
 	}
+	
+	
+	 public String forgetpassword(String email) {
+	    	
+	        boolean isValidEmail = emailValidator.test(email);
+	       // String token ="";
+
+	        if (!isValidEmail) {
+	            throw new IllegalStateException("email not valid");
+	        }
+
+			
+	        String token = UUID.randomUUID().toString();
+	        User u = userRepo.findByEmail(email).orElse(null);
+	        ResetPasswordToken resetToken = new ResetPasswordToken(
+	        		token,
+	        		LocalDateTime.now(),
+	        		LocalDateTime.now().plusMinutes(15),
+	        		u
+	        		
+	        		);
+	        passwordTokenRepository.save(resetToken);
+
+	        String link = "http://localhost:8089/SpringMVC/registration/forgetpassword"+email;
+	        emailSender.send(email, buildEmailReset("User",link));
+	        return token;
+	    }
+	 @Transactional
+	    public String resetPassword(String token,String email,String password) {
+	    	ResetPasswordToken resetPasswordToken = passwordTokenService
+	                .getToken(token)
+	                .orElseThrow(() ->
+	                        new IllegalStateException("token not found"));
+
+	        if (resetPasswordToken.getConfirmedAt() != null) {
+	            throw new IllegalStateException("already changed");
+	        }
+
+	        LocalDateTime expiredAt = resetPasswordToken.getExpiresAt();
+
+	        if (expiredAt.isBefore(LocalDateTime.now())) {
+	            throw new IllegalStateException("token expired");
+	        }
+
+	        resetPasswordToken.setConfirmedAt(LocalDateTime.now());
+	        passwordTokenRepository.save(resetPasswordToken);
+	       
+	        String encodedPassword = bCryptPasswordEncoder
+	                .encode(password);
+	        userRepo.resetPassword(encodedPassword, email);
+	        return "confirmed";
+	    }
+	 
+	 
+	 
 	
 	@Transactional
 		public String confirmToken(String token) {
@@ -153,6 +219,7 @@ public class RegistrationService {
                 "</div></div>";
     }
     
+	
     private String buildEmailReset(String name, String link) {
         return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
                 "\n" +
@@ -221,6 +288,7 @@ public class RegistrationService {
                 "\n" +
                 "</div></div>";
     }
+    
 
 		   
 	}
