@@ -3,6 +3,7 @@ package tn.pi.spring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import tn.pi.spring.Iservice.Ibus;
 import tn.pi.spring.entity.Bus;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/bus")
 public class BusRestController {
 
@@ -44,8 +46,16 @@ public class BusRestController {
 		
 			return busService.retrieveBus(busId);
 		}
-
+		
 		// http://localhost:8089/SpringMVC/bus/add-bus
+		@PostMapping("/retrieve-all-bus")
+		@ResponseBody
+		public Bus addBus(@RequestBody Bus b) {
+			Bus bus = busService.addBus(b);
+			return bus;
+				}
+
+		// http://localhost:8089/SpringMVC/bus/add-bus/{idTrajet}
 		@PostMapping("/add-bus/{idTrajet}")
 		@ResponseBody
 		public Bus addBus(@RequestBody Bus b,@PathVariable("idTrajet") Long idTrajet) {

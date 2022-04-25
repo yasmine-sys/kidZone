@@ -31,6 +31,12 @@ public class BusService implements Ibus{
 		//return buss;
 		return (List<Bus>) busRepository.findAll();
 	}
+	
+	@Override
+	public Bus addBus(Bus b) {
+		log.info("In method addEnfant");
+		return busRepository.save(b);
+	}
 
 	@Override
 	public Bus addBus(Bus b, Long idTrajet) {
