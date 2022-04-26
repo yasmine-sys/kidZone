@@ -3,6 +3,7 @@ package tn.pi.spring.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 
@@ -17,8 +18,8 @@ public class MenuService implements IMenu {
 
 	@Override
 	public List<Menu>retrieveAllMenu() {
-		List<Menu> listMenu = (List<Menu>) menuRepository.findAll();
-		return listMenu;
+		 //List<Menu> listMenu = (List<Menu>) menuRepository.findAll();
+		 return (List<Menu>) menuRepository.findAll();
 	}
 
 	@Override
@@ -43,4 +44,10 @@ public class MenuService implements IMenu {
 		return Menu;
 	}
 
+	//@Override
+	//public Menu findRandom() {
+		//Menu Menu = menuRepository.findRandom();
+		//return Menu;
+	//}
+	
 }

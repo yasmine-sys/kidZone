@@ -16,7 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 	import lombok.Getter;
@@ -42,16 +41,14 @@ import lombok.AllArgsConstructor;
 		@Column(name="pensioncantine")
 		private String pensioncantine;
 		
-		@Enumerated(EnumType.STRING)
-		private Abonnement abonnement;
 		@Column(name="prixcantine")
 		private float prixcantine;
 		@ManyToOne
 	    Jardinenfant jardinenfant;
-		@JsonIgnore
+	
 		@OneToMany(mappedBy="cantine")
 		private List<Menu> Menu;
-		@JsonIgnore
+		
 		@OneToMany(mappedBy="cantine")
 		private List<InscriCantine> inscriCantines;
 

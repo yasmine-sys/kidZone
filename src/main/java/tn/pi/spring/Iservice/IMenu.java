@@ -15,4 +15,8 @@ public interface IMenu {
 	Menu updateMenu (Menu r);
 	
 	Menu retrieveMenu (Long id);
+
+	//Menu findRandom();
+	
+
 }

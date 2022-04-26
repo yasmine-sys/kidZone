@@ -1,8 +1,6 @@
 package tn.pi.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -20,29 +18,30 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Getter
 @Setter
-@Table(name = "InscriCantine")
-public class InscriCantine implements Serializable {
+@Table(name = "ListMenu")
+public class ListMenu implements Serializable {
 
-
-	public static final long serialVersionUID =1L;
-	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	@Column(name="idinscri")
-	private Long idinscri;
-	@Column(name="DateInscriCantine")
-	private Date dateinscri;
-	@Enumerated(EnumType.STRING)
-	private Abonnement abonnement;
-	
-	@ManyToOne
-    Enfant Enfant;
-	@ManyToOne
-	Cantine cantine;
+		public static final long serialVersionUID =1L;
+		@Id
+		@GeneratedValue (strategy = GenerationType.IDENTITY)
+		@Column(name="idListMenu")
+		private Long idListMenu;
+		@Column(name="Platprincipale")
+		private String Platprincipale;
+		@Column(name="Entree")
+		private String Entree;
+		@Column(name="Desert")
+		private String Desert;
+		@Enumerated(EnumType.STRING)
+		private jour jour;
+		@ManyToOne
+		Menu Menu;
+		
+		
 }
