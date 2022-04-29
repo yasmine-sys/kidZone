@@ -42,7 +42,7 @@ public class CommentaireServiceImpl implements CommentaireService {
 			com.setUser(user);
 			return com_rep.save(com);
 		}).get();
-		return publicationRep.findById((long) pub_id).map(pub -> {
+		return publicationRep.findById(pub_id).map(pub -> {
 			com.setPub_id(pub);
 			return com_rep.save(com);
 		}).get();

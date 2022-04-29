@@ -11,9 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -24,9 +24,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 
@@ -34,6 +31,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
+@Table(name = "Publication")
 
 public class Publication implements Serializable  {
 	private static final long serialVersionUID = 1L;
@@ -70,10 +68,12 @@ public class Publication implements Serializable  {
 	@ManyToOne
 	@JoinColumn(name = "user", nullable=false)
 	private User user;
-	@Lob
-	private byte[] pic;
+/*	@Lob
+	private byte[] pic; */
+	@JsonIgnore
 	@OneToMany(mappedBy="pub",cascade=CascadeType.ALL)
 	private List<LikePublication> likes;
+	@JsonIgnore
 	@OneToMany(mappedBy = "pub_id",cascade=CascadeType.ALL)
 	private List<Commentaire> comments;
 	
@@ -171,37 +171,35 @@ public class Publication implements Serializable  {
 		this.id = id;
 	}
 
-	public byte[] getPic() {
+	/*public byte[] getPic() {
 		return pic;
 	}
 
 	public void setPic(byte[] pic) {
 		this.pic = pic;
 	}
-
-	public Publication(int id, String publication_txt, User user, byte[] pic, List<LikePublication> likes,
+*/
+	public Publication(int id, String publication_txt, User user, List<LikePublication> likes,
 			List<Commentaire> comments) {
 		super();
 		this.id = id;
 		this.publication_txt = publication_txt;
 		this.user = user;
-		this.pic = pic;
 		this.likes = likes;
 		this.comments = comments;
 	}
 
 
 
-	public Publication(String publication_txt, User user, byte[] pic, List<LikePublication> likes, List<Commentaire> comments) {
+/*	public Publication(String publication_txt, User user, List<LikePublication> likes, List<Commentaire> comments) {
 		super();
 		this.publication_txt = publication_txt;
 		this.user = user;
-		this.pic = pic;
 		this.likes = likes;
 		this.comments = comments;
 	}
 
-
+*/
 
 	public String getTitle() {
 		return title;
@@ -214,26 +212,24 @@ public class Publication implements Serializable  {
 
 
 
-	public Publication(int id, String title, String publication_txt, User user, byte[] pic, List<LikePublication> likes,
+	public Publication(int id, String title, String publication_txt, User user, List<LikePublication> likes,
 			List<Commentaire> comments) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.publication_txt = publication_txt;
 		this.user = user;
-		this.pic = pic;
 		this.likes = likes;
 		this.comments = comments;
 	}
 
 
-	public Publication(String title, String publication_txt, User user, byte[] pic, List<LikePublication> likes,
+	public Publication(String title, String publication_txt, User user, List<LikePublication> likes,
 			List<Commentaire> comments) {
 		super();
 		this.title = title;
 		this.publication_txt = publication_txt;
 		this.user = user;
-		this.pic = pic;
 		this.likes = likes;
 		this.comments = comments;
 	}

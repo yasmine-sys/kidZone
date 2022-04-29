@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @EnableWebMvc
 @SpringBootApplication
-
+@EntityScan( basePackages = {"tn.pi.spring.entity"})
 public class PIApplication {
 
 	public static void main(String[] args) {

@@ -12,6 +12,7 @@ public interface PublicationService {
 	
 	List<Publication>retrievAllPublications();
 	public String AddPublication(int user_id,Publication pub) throws Exception;
+	public String AddPublication(Publication pub);
 	public List<Publication> RetrievePublication();
 	public void UpdatePublicationById(Publication pub, int id);
 	public void DeletePublication(int id);

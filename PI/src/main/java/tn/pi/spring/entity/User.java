@@ -2,6 +2,7 @@ package tn.pi.spring.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -32,50 +33,33 @@ public class User implements Serializable{
 	@Column(name="id")
 	private Long id;
 	
-	@Column(name="nom")
-	private String nom;
+	@Column(name="firstName")
+	private String firstName;
+	
+	@Column(name="lastName")
+	private String lastName;
 	
 	@Column(name="Description")
 	private String Description;
 	
-	@Column(name="nbrEmployee")
-	private Long nbrEmployee;
+	@Column(name="adress")
+	private String adress;
 	
-
+	
+	@Column(name="telephone")
+	private String telephone;
+	
 	@Column(name="dateCreation")
-	private Date dateCreation;
+	private LocalDateTime  dateCreation;
+	
+	@Column(name="email")
+	private String email;
+	
+	@Column(name="password")
+	private String password;
 	
 
-	@Column(name="Tel")
-	private Long Tel;
-	
 
-	@Column(name="Localisation")
-	private String Localisation;
-	
-
-	@Column(name="enfantMax")
-	private Long enfantMax;
-	
-
-	@Column(name="logo")
-	private String logo;
-	
-	@Column(name="mail")
-	private String mail;
-	
-	@Column(name="passwd")
-	private String passwd;
-
-	@Column(name="Prenom")
-	private String Prenom;
-
-	@Column(name="photo")
-	private String photo;
-	
-	@Column(name="nbrEnfant")
-	private Long nbrEnfant;
-	
 	//@OneToMany(mappedBy = "UserPubication")
 	//private  List <Publication> Publications;
 	

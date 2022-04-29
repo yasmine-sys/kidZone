@@ -30,7 +30,7 @@ public class LikeServiceImpl implements LikeService{
 		if (like_rep.FindUserByIdFromLikes(pub_id, user_id)==0) {
 			
 				if (user2.getId()== user_id) {
-					pub_rep.findById((long) pub_id).map(p -> {
+					pub_rep.findById(pub_id).map(p -> {
 						  likes.setPub(p);
 						  likes.setUser(user2);
 						  likes.setLiked(true);
@@ -101,7 +101,7 @@ public class LikeServiceImpl implements LikeService{
 		if (like_rep.FindUserByIdFromDislikes(pub_id, user_id)==0) {
 			
 				if (user2.getId()== user_id) {
-					pub_rep.findById((long) pub_id).map(p -> {
+					pub_rep.findById(pub_id).map(p -> {
 						  likes.setPub(p);
 						  likes.setUser(user2);
 						  likes.setLiked(false);

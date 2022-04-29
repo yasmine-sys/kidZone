@@ -7,26 +7,34 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
-import tn.pi.spring.entity.Message;
+import tn.pi.spring.model.ChatMessage;
+
+
 
 
 @Controller
 public class ChatController {
+	
+	
+	
+	
+	
+	@MessageMapping("/chat.sendMessage")
+	@SendTo("/topic/public")
+	public ChatMessage sendMessage(@Payload ChatMessage chatMessagePojo) {
+		return chatMessagePojo;
+	}
 
-    @MessageMapping("/chat.sendMessage")
-    @SendTo("/topic/public")
-    public Message sendMessage(@Payload Message Message) {
-        return Message;
-    }
+	@MessageMapping("/chat.addUser")
+	@SendTo("/topic/public")
+	public ChatMessage addUser(@Payload ChatMessage chatMessagePojo, SimpMessageHeaderAccessor headerAccessor) {
 
-    @MessageMapping("/chat.addUser")
-    @SendTo("/topic/public")
-    public Message addUser(@Payload Message Message,
-                               SimpMessageHeaderAccessor headerAccessor) {
-       //  Add username in web socket session
-        headerAccessor.getSessionAttributes().put("username" , Message.getSender());
-        return Message;
-    }
-
+		// Add username in web socket session
+		headerAccessor.getSessionAttributes().put("username", chatMessagePojo.getSender());
+		return chatMessagePojo;
+	}
+	
 }
+
