@@ -1,10 +1,15 @@
 package tn.pi.spring.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.BeanDefinitionDsl.Role;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,6 +17,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import tn.pi.spring.entity.Blacklist;
 import tn.pi.spring.entity.User;
 import tn.pi.spring.registration.token.ConfirmationToken;
@@ -23,6 +30,7 @@ import tn.pi.spring.repository.BlacklistRepository;
 
 @AllArgsConstructor
 @Service
+@Slf4j
 public class AppUserService implements UserDetailsService {
 
 	
@@ -32,12 +40,35 @@ public class AppUserService implements UserDetailsService {
     private final ConfirmationTokenService confirmationTokenService;
     private final BlacklistRepository blacklistRepository;
 
-	@Override
+    @Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		User user = appUserRepository.findByEmail(email).orElse(null);
+    	if (user==null) {
+    		log.error("user not found in the data base");
+    		throw new UsernameNotFoundException("user not found in the data base");
+    		
+    	}else {
+    		log.info("user found in the data base");
+
+    	}
+    	List<SimpleGrantedAuthority> authorities = getUserAuthority(user.getRole().name());
+    
+		return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(), authorities);    }
+    
+		private List<SimpleGrantedAuthority> getUserAuthority(String userRoles) {
+			Set<SimpleGrantedAuthority> roles = new HashSet<SimpleGrantedAuthority>();
+			
+			roles.add(new SimpleGrantedAuthority(userRoles)); 
+			List<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<>(roles);
+			return grantedAuthorities;
+		}
+	 
+	/*@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		return appUserRepository.findByEmail(email)
 				.orElseThrow(()-> new UsernameNotFoundException(
 						String.format(USER_NOT_FOUND_MSG, email)));
-	}
+	}*/
 	public String signUpUser(User appUser) {
 		boolean userExists = appUserRepository
                 .findByEmail(appUser.getEmail())
