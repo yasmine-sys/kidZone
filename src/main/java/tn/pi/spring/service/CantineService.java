@@ -17,8 +17,8 @@ public class CantineService implements ICantine {
 
 	@Override
 	public List<Cantine> retrieveAllCantine() {
-		List<Cantine> cantines = (List<Cantine>) cantineRepository.findAll();
-		return cantines;
+		//List<Cantine> cantines = (List<Cantine>) cantineRepository.findAll();
+		return (List<Cantine>) cantineRepository.findAll();
 
 	}
 

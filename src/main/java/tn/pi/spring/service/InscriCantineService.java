@@ -18,11 +18,12 @@ public class InscriCantineService implements IInscriCantine{
 	
 	@Override
 	public List<InscriCantine> retrieveAllInscriCantine() {
-		List<InscriCantine> InscriCantine = (List<InscriCantine>) inscriCantineRepository.findAll();
+		/*List<InscriCantine> InscriCantine = (List<InscriCantine>) inscriCantineRepository.findAll();
 		for (InscriCantine InscriCantine1 : InscriCantine) {
 			log.info(" InscriCantine : " + InscriCantine1);
 		}
-		return InscriCantine;
+		*/
+		return (List<InscriCantine>) inscriCantineRepository.findAll();
 	}
 
 	@Override

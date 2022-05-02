@@ -1,14 +1,11 @@
 package tn.pi.spring.controller;
 
-import java.io.Console;
 import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,17 +20,14 @@ import com.lowagie.text.DocumentException;
 
 import tn.pi.entity.Menu;
 import tn.pi.spring.Iservice.IMenu;
-import tn.pi.spring.repository.MenuRepository;
 import tn.pi.spring.service.MenuPdf;
 
 @RestController
-@CrossOrigin(origins = "hhtp://localhost:4200")
+
 @RequestMapping("/Menu")
 public class MenuRestController {
 	@Autowired
 	IMenu menuService;
-	@Autowired
-	MenuRepository menurep;
 
 	// http://localhost:8089/SpringMVC/Menu/retrieve-all-Menu/
 	@GetMapping("/retrieve-all-menu")
@@ -54,7 +48,8 @@ public class MenuRestController {
 	}
 
 	// http://localhost:8089/SpringMVC/Menu/add-Menu
-	@PostMapping("/add-menu")
+	//@PostMapping("/add-menu")
+	@PostMapping("/addmenu")
 	@ResponseBody
 	public Menu addMenu(@RequestBody Menu e) {
 		Menu Menu = menuService.addMenu(e);
@@ -90,10 +85,5 @@ public class MenuRestController {
 	    exporter.export(response);
 	   
 	}
-	@GetMapping(value="/getmenu")
-	@ResponseBody
-	 public  List <Menu> getRandArticles(){
-		
-		return menurep.findRandom();
-	}
+
 }

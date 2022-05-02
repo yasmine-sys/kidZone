@@ -26,11 +26,12 @@ public class InscriCantineRestController {
 	@GetMapping("/retrieve-all-inscriCantine")
 	@ResponseBody
 	public List<InscriCantine> getInscriCantine() {
-		System.out.println("ggggg");
+		/*System.out.println("ggggg");
 		
 		List<InscriCantine> list = InscriCantineService.retrieveAllInscriCantine();
 		System.out.println(list);
-		return list;
+		*/
+		return InscriCantineService.retrieveAllInscriCantine();
 	}
 
 	// http://localhost:8089/SpringMVC/inscriCantine/retrieve-inscriCantine/8

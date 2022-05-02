@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,10 +36,13 @@ public class Menu implements Serializable {
 	private Long idmenu;
 	@Column(name="contenumenu")
 	private String contenumenu;
+	
 	@ManyToOne
 	Cantine cantine;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="Menu")
-	private Set<ListMenu> ListMenu;
+	
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="menus")
+	private Set<ListMenu> listMenu;
 	
 	
 }

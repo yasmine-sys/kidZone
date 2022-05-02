@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,14 +21,18 @@ import com.lowagie.text.DocumentException;
 
 import tn.pi.entity.ListMenu;
 import tn.pi.spring.Iservice.IListMenu;
+import tn.pi.spring.repository.ListMenuRepository;
 import tn.pi.spring.service.ListMenuPdf;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/ListMenu")
 public class ListMenuRestController {
 	
 		@Autowired
 		IListMenu ListMenuService;
+		@Autowired
+		ListMenuRepository menurep;
 
 		// http://localhost:8089/SpringMVC/Menu/retrieve-all-Menu
 		@GetMapping("/retrieve-all-ListMenu")
@@ -85,4 +90,11 @@ public class ListMenuRestController {
 		    exporter.export(response);
 		     		    
 		}
+		@GetMapping(value="/getmenu")
+		@ResponseBody
+		 public  List<ListMenu> getRandArticles(){
+			
+			return menurep.findRandom();
+		}
+
 }

@@ -11,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,7 +39,7 @@ public class ListMenu implements Serializable {
 		@Enumerated(EnumType.STRING)
 		private jour jour;
 		@ManyToOne
-		Menu Menu;
+		Menu menus;
 		
 		
 }

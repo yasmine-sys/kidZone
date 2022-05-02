@@ -2,6 +2,7 @@ package tn.pi.entity;
 
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -33,8 +34,21 @@ public class Jardinenfant implements Serializable {
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	@Column(name="idjardin")
 	private Long idjardin;
+	 private Date dateCreation; 
+	 private String nom;
+	 private String prenom;
+	 private String localisation;
+	 private String logo;
+	 private String description;
+	 private String mail;
+	 private String passwd;
+   private String photo;
+	 private Long nbremployee;
+	 private Long nbrenfant;
+	 private Long enfantmax;
+	 private Long tel;
 	
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="jardinenfant")
-	
-	private Set<Cantine> cantine;
+		private Set<Cantine> cantine;
 }

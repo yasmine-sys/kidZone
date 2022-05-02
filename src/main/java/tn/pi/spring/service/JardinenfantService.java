@@ -18,11 +18,12 @@ public class JardinenfantService implements IJardinenfant {
 	
 	@Override
 	public List<Jardinenfant> retrieveAllJardinenfant() {
-		List<Jardinenfant> Jardinenfant = (List<Jardinenfant>) jardinenfantRepository.findAll();
+		/*List<Jardinenfant> Jardinenfant = (List<Jardinenfant>) jardinenfantRepository.findAll();
 		for (Jardinenfant Jardinenfant1 : Jardinenfant) {
 			log.info(" Jardinenfant : " + Jardinenfant1);
 		}
-		return Jardinenfant;
+		*/
+		return (List<Jardinenfant>) jardinenfantRepository.findAll();
 	}
 
 	@Override

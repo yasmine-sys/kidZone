@@ -4,11 +4,9 @@ package tn.pi.entity;
 import java.io.Serializable;
 import java.util.List;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 	import lombok.Getter;
@@ -43,13 +42,17 @@ import lombok.AllArgsConstructor;
 		
 		@Column(name="prixcantine")
 		private float prixcantine;
+		
+		@JsonIgnore
 		@ManyToOne
 	    Jardinenfant jardinenfant;
-	
-		@OneToMany(mappedBy="cantine")
-		private List<Menu> Menu;
 		
-		@OneToMany(mappedBy="cantine")
+		@JsonIgnore
+		@OneToMany(cascade = CascadeType.ALL, mappedBy="cantine")
+		private List<Menu> menu;
+		
+		@JsonIgnore
+		@OneToMany(cascade = CascadeType.ALL, mappedBy="cantines")
 		private List<InscriCantine> inscriCantines;
 
 	}

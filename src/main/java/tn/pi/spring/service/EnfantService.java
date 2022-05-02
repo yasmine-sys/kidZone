@@ -18,11 +18,12 @@ public class EnfantService implements Ienfant{
 	
 	@Override
 	public List<Enfant> retrieveAllEnfant() {
-		List<Enfant> enfants = (List<Enfant>) enfantRepository.findAll();
+		/*List<Enfant> enfants = (List<Enfant>) enfantRepository.findAll();
 		for (Enfant enfant : enfants) {
 			log.info(" Enfant : " + enfant);
 		}
-		return enfants;
+		*/
+		return (List<Enfant>) enfantRepository.findAll();
 	}
 
 	@Override

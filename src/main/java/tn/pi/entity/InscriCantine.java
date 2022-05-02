@@ -40,9 +40,13 @@ public class InscriCantine implements Serializable {
 	private Date dateinscri;
 	@Enumerated(EnumType.STRING)
 	private Abonnement abonnement;
+	@Column(name="Prix")
+	private Long prix;
 	
 	@ManyToOne
     Enfant Enfant;
+	
+	@JsonIgnore
 	@ManyToOne
-	Cantine cantine;
+	Cantine cantines;
 }

@@ -26,11 +26,12 @@ public class EnfantRestController {
 	@GetMapping("/retrieve-all-enfants")
 	@ResponseBody
 	public List<Enfant> getEnfants() {
-		System.out.println("ggggg");
+		/*System.out.println("ggggg");
 		
 		List<Enfant> list = enfantService.retrieveAllEnfant();
 		System.out.println(list);
-		return list;
+		*/
+		return enfantService.retrieveAllEnfant();
 	}
 
 	// http://localhost:8089/SpringMVC/enfant/retrieve-enfant/8

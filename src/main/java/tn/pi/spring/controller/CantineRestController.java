@@ -26,11 +26,12 @@ public class CantineRestController {
 	@GetMapping("/retrieve-all-cantines")
 	@ResponseBody
 	public List<Cantine> geCantine() {
-		System.out.println("ggggg");
+		/*System.out.println("ggggg");
 		
 		List<Cantine> list = cantineService.retrieveAllCantine();
 		System.out.println(list);
-		return list;
+		*/
+		return cantineService.retrieveAllCantine();
 	}
 
 	// http://localhost:8089/SpringMVC/Cantine/retrieve-Cantine/8

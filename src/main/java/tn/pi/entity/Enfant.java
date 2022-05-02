@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,11 +40,13 @@ public class Enfant implements Serializable {
 	private String prenom;
 	@Column(name="date_naissance")
 	private Date date_naissance;
-	@Column(name="etat_sante")
-	private String etat_sante;
-	@Column(name="interets")
-	private String interets;
+	@Column(name="sexe")
+	private String sexe;
+	@Column(name="ville")
+	private String ville;
 
+
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="Enfant")
 	private Set<InscriCantine> InscriCantine;
 	

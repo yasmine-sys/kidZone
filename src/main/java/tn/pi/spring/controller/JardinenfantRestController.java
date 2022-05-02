@@ -22,14 +22,16 @@ public class JardinenfantRestController {
 	@Autowired
 	IJardinenfant JardinenfantService;
 
+
 	// http://localhost:8089/SpringMVC/Menu/retrieve-all-Menu
 	@GetMapping("/retrieve-all-Jardinenfant")
 	@ResponseBody
 	public List<Jardinenfant> geJardinenfant() {
-		System.out.println("ggggg");
+		/*System.out.println("ggggg");
 		List<Jardinenfant> list = JardinenfantService.retrieveAllJardinenfant();
 		System.out.println(list);
-		return list;
+		*/
+		return JardinenfantService.retrieveAllJardinenfant();
 	}
 
 	// http://localhost:8089/SpringMVC/Menu/retrieve-Menu/8
