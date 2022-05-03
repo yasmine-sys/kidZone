@@ -3,10 +3,7 @@ package tn.pi.spring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< Updated upstream
-=======
 import org.springframework.web.bind.annotation.CrossOrigin;
->>>>>>> Stashed changes
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,10 +18,7 @@ import tn.pi.spring.Iservice.Itrajet;
 import tn.pi.spring.entity.Trajet;
 
 @RestController
-<<<<<<< Updated upstream
-=======
 @CrossOrigin(origins = "*")
->>>>>>> Stashed changes
 @RequestMapping("/trajet")
 public class TrajetRestController {
 	@Autowired
@@ -74,19 +68,11 @@ public class TrajetRestController {
 	
 	//affichage des trajets par longueur de trajet  
 	 //http://localhost:8085/SpringMVC/trajet/retrieveTrajetByLongeurTrajet/{longeur_trajet}
-<<<<<<< Updated upstream
-	@GetMapping("/retrieveTrajetByLongeurTrajet/{longeur_trajet}")
-	@ResponseBody
-	
-	public List<Trajet> retrieveTrajetByLongeurTrajet(@PathVariable("longeur_trajet") Long longeur_trajet) {
-		return trajetService.retrieveTrajetByLongeurTrajet(longeur_trajet);
-=======
 	@GetMapping("/retrieveTrajetByLongueurTrajet/{longueur_trajet}")
 	@ResponseBody
 	
 	public List<Trajet> retrieveTrajetByLongueurTrajet(@PathVariable("longueur_trajet") Long longueur_trajet) {
 		return trajetService.retrieveTrajetByLongueurTrajet(longueur_trajet);
->>>>>>> Stashed changes
 	}
 
 }

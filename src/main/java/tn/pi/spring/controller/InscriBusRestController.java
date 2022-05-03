@@ -6,10 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< Updated upstream
-=======
 import org.springframework.web.bind.annotation.CrossOrigin;
->>>>>>> Stashed changes
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,10 +24,7 @@ import tn.pi.spring.entity.InscriBus;
 import tn.pi.spring.service.InscriBusPdf;
 
 @RestController
-<<<<<<< Updated upstream
-=======
 @CrossOrigin(origins = "*")
->>>>>>> Stashed changes
 @RequestMapping("/inscriBus")
 public class InscriBusRestController {
 	@Autowired
@@ -65,15 +59,9 @@ public class InscriBusRestController {
 	}
 
 	// http://localhost:8085/SpringMVC/inscriBus/remove-inscriBus/{inscriBus-id}
-<<<<<<< Updated upstream
-	@DeleteMapping("/remove-inscriBus/{inscriBus-id}")
-	@ResponseBody
-	public void removeInscriBus(@PathVariable("inscriBus-id") Long inscriBusId) {
-=======
 	@DeleteMapping("/remove-inscriBus/{inscriBusid}")
 	@ResponseBody
 	public void removeInscriBus(@PathVariable("inscriBusid") Long inscriBusId) {
->>>>>>> Stashed changes
 		inscriBusService.deleteInscriBus(inscriBusId);
 	}
 

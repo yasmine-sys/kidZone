@@ -18,11 +18,7 @@ import tn.pi.spring.Iservice.Ibus;
 import tn.pi.spring.entity.Bus;
 
 @RestController
-<<<<<<< Updated upstream
-@CrossOrigin(origins = "http://localhost:4200")
-=======
 @CrossOrigin(origins = "*")
->>>>>>> Stashed changes
 @RequestMapping("/bus")
 public class BusRestController {
 
@@ -52,11 +48,7 @@ public class BusRestController {
 		}
 		
 		// http://localhost:8089/SpringMVC/bus/add-bus
-<<<<<<< Updated upstream
-		@PostMapping("/retrieve-all-bus")
-=======
 		@PostMapping("/add-bus")
->>>>>>> Stashed changes
 		@ResponseBody
 		public Bus addBus(@RequestBody Bus b) {
 			Bus bus = busService.addBus(b);
