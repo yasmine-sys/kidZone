@@ -12,6 +12,12 @@ import java.util.*;
 @Table(name = "user")
 public class UserEntity implements Serializable {
 
+public List<EventEntity> getEvent() {
+		return event;
+	}
+	public void setEvent(List<EventEntity> event) {
+		this.event = event;
+	}
 private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -30,6 +36,11 @@ private static final long serialVersionUID = 1L;
 	  //@JsonBackReference
 	  @OneToMany(mappedBy="user") 
 	  private List<EnfantEntity> enfant;
+	@JsonIgnore
+	  @OneToMany(mappedBy="user") 
+	  private List<EventEntity> event;
+	
+	
 	
 	public List<EnfantEntity> getEnfant() {
 		return enfant;

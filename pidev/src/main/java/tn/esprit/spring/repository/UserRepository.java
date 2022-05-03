@@ -20,7 +20,7 @@ public interface UserRepository extends JpaRepository <UserEntity, Long> {
 	public List<UserEntity> getParents(@Param("parent")Role role);
 	
 	//getChildren by userId
-	@Query(value= "SELECT e.nom FROM user u, enfant e where u.id_user=e.user_id_user AND u.id_user:=id",nativeQuery = true)
+	@Query(value= "SELECT e.* FROM user u, enfant e where u.id_user=e.user_id_user AND u.id_user=:id",nativeQuery = true)
 	 List<EnfantEntity> getChildren(@Param("id") Long id);
 	/*
 	@Query("SELECT count(e.id), e.profession FROM user e group by e.profession")

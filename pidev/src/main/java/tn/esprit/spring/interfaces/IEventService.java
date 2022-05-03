@@ -3,6 +3,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import tn.esprit.spring.entity.EventEntity;
 
@@ -21,7 +23,7 @@ public interface IEventService {
 
 	//public void updateEvent(EventEntity e, Long idEvent);
 	
-	public ResponseEntity<String>  ajoutByDirecteurJardin(EventEntity event, Long userId);
+	//public ResponseEntity<String>  ajoutByDirecteurJardin(Long eventId,Long userId,MultipartFile file);
 	public List<EventEntity> getAllEventPourToday();
 
 	public List<EventEntity> getAllEventOrdonneParDate();
@@ -38,6 +40,9 @@ public interface IEventService {
 	//public void deleteEventTitreById(Long idEvent);
 	EventEntity addEvent(EventEntity s);
 	EventEntity updateEvent(EventEntity s);
+	public void addEventByUser(EventEntity s, Long idUser);
+	public List<EventEntity> getAllEventByEnfant(Long idEnfant);
+	//public void updateEvente(EventEntity e, Long idEvent, MultipartFile file);
 	
 
 }

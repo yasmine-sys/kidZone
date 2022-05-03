@@ -76,15 +76,21 @@ public class UserRestController {
 		}
 		
 		
-		// http://localhost:8080/SpringMVC/servlet/affecterchildAparent
+		/*// http://localhost:8080/SpringMVC/servlet/affecterchildAparent
 					@PutMapping("/affecterchildAparent/{parentId}/{childId}")
 					@ResponseBody
 					public void affecterchildAparent(@PathVariable("parentId") Long parentId,@PathVariable("childId") Long childId  ) 
 					{
 					 userService.affecterchildAparent(parentId,childId);
+					}*/
+					
+					
+					@GetMapping("/findEnfantByUser/{idUser}")
+				    @ResponseBody
+					public List<EnfantEntity> getChildren(@PathVariable("idUser") Long idUser) {
+
+						return userService.getChildren(idUser);
 					}
-		
-		
 		
 		
 					// http://localhost:8080/SpringMVC/servlet/retrievechildren/{id}

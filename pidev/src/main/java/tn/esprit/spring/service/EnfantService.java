@@ -10,6 +10,7 @@ import tn.esprit.spring.entity.EnfantEntity;
 import tn.esprit.spring.entity.UserEntity;
 import tn.esprit.spring.interfaces.IEnfantService;
 import tn.esprit.spring.repository.EnfantRepository;
+import tn.esprit.spring.repository.ReservationRepository;
 import tn.esprit.spring.repository.UserRepository;
 @Service
 @Slf4j
@@ -18,6 +19,13 @@ public class EnfantService implements IEnfantService {
      EnfantRepository enfantRepository ;
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	ReservationRepository  reservationRepository;
+	
+	@Override
+	public List<EnfantEntity> findAllEnfantByEventJPQL(Long idEvent) {
+		return enfantRepository.findAllEnfantByEventJPQL(idEvent);
+	}
 	@Override
 	public List<EnfantEntity> retrieveAllChildren() {
 		return (List<EnfantEntity>) enfantRepository.findAll() ;
@@ -47,13 +55,23 @@ public class EnfantService implements IEnfantService {
 		return	enfantRepository.findById((long) Integer.parseInt(id)).orElse(null);
 	}
 
+
+	
 	@Override
-	public void affecterchildAparent(Long idEnfant, Long parentId) {
-		UserEntity p = userRepository.findById(parentId).get();
-		EnfantEntity c =  enfantRepository.findById(idEnfant).get() ;
+	public void affecterchildAparent(Long childId, Long parentId) {
+		EnfantEntity c = enfantRepository.findById(childId).orElse(null);
+		UserEntity p = userRepository.findById(parentId).orElse(null);
+		c.setUser(p);
+		userRepository.save(p);
 		
-		p.getEnfant().add(c);
-		userRepository.save(p) ;
+	
+	}
+	@Override
+	public void addEnfantByUser(EnfantEntity s, Long idUser) {
+		UserEntity u = userRepository.findById(idUser).get();
+		s.setUser(u);
+
+		enfantRepository.save(s);
 		
 	}
 
