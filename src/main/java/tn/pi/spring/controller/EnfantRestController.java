@@ -3,6 +3,10 @@ package tn.pi.spring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< Updated upstream
+=======
+import org.springframework.web.bind.annotation.CrossOrigin;
+>>>>>>> Stashed changes
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +21,10 @@ import tn.pi.spring.Iservice.Ienfant;
 import tn.pi.spring.entity.Enfant;
 
 @RestController
+<<<<<<< Updated upstream
+=======
+@CrossOrigin(origins = "*")
+>>>>>>> Stashed changes
 @RequestMapping("/enfant")
 public class EnfantRestController {
 	@Autowired

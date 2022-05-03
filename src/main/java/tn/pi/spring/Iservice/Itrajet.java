@@ -15,5 +15,9 @@ public interface Itrajet {
 
 	Trajet retrieveTrajet (Long id);
 	
+<<<<<<< Updated upstream
 	List<Trajet> retrieveTrajetByLongeurTrajet(Long l);
+=======
+	List<Trajet> retrieveTrajetByLongueurTrajet(Long l);
+>>>>>>> Stashed changes
 }

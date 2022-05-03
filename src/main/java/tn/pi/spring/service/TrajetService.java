@@ -52,8 +52,13 @@ public class TrajetService implements Itrajet{
 	}
 
 	@Override
+<<<<<<< Updated upstream
 	public List<Trajet> retrieveTrajetByLongeurTrajet(Long l) {
 		return(List<Trajet>)trajetRepository.retrieveTrajetByLongeurTrajet(l);
+=======
+	public List<Trajet> retrieveTrajetByLongueurTrajet(Long l) {
+		return(List<Trajet>)trajetRepository.retrieveTrajetByLongueurTrajet(l);
+>>>>>>> Stashed changes
 	}
 
 }

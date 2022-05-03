@@ -53,7 +53,11 @@ import lombok.ToString;
 		@OneToMany(cascade = CascadeType.ALL, mappedBy="buss")
 		private Set<InscriBus> InscriBus;
 		
+<<<<<<< Updated upstream
 		@JsonIgnore
+=======
+		//@JsonIgnore
+>>>>>>> Stashed changes
 		@OneToOne
 		Chauffeur chauffeurs;
 }

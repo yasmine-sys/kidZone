@@ -41,10 +41,17 @@ public class Trajet {
 	private String point_2;
 	@Column(name="point_3")
 	private String point_3;
+<<<<<<< Updated upstream
 	@Column(name="point_arivee")
 	private String point_arivee;
 	@Column(name="longeur_trajet")
 	private Long longeur_trajet;
+=======
+	@Column(name="point_arrivee")
+	private String point_arrivee;
+	@Column(name="longueur_trajet")
+	private Long longueur_trajet;
+>>>>>>> Stashed changes
 	@Column(name="duree_trajet")
 	private String duree_trajet;
 	@Column(name="heure_depart")
@@ -54,8 +61,13 @@ public class Trajet {
 	private Set<Bus> bus;*/
 	
 	@JsonIgnore
+<<<<<<< Updated upstream
 	@ManyToMany(cascade=CascadeType.ALL)
 	private List<Bus> buus;
+=======
+	@ManyToMany(cascade=CascadeType.ALL, mappedBy="trajets")
+	private List<Bus> bus;
+>>>>>>> Stashed changes
 	
 
 }

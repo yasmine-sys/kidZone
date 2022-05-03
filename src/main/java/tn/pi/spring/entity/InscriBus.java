@@ -2,6 +2,10 @@ package tn.pi.spring.entity;
 
 import java.sql.Date;
 
+<<<<<<< Updated upstream
+=======
+import javax.persistence.CascadeType;
+>>>>>>> Stashed changes
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -43,6 +47,12 @@ public class InscriBus {
 	
 	@ManyToOne
 	Bus buss;
+<<<<<<< Updated upstream
+=======
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	Trajet trajet;
+>>>>>>> Stashed changes
 
 
 }
