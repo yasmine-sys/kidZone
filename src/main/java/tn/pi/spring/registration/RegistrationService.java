@@ -60,7 +60,7 @@ public class RegistrationService {
 							request.getPassword(),
 							request.getRole())
 					);
-		String link="http://localhost:8089/registration/confirm?token="+ token;
+		String link="http://localhost:8089/SpringMVC/registration/confirm?token="+ token;
 		emailSender.send(
 				request.getEmail(), 
 				buildEmail(request.getFirstName(), link));		
@@ -89,7 +89,7 @@ public class RegistrationService {
 	        		);
 	        passwordTokenRepository.save(resetToken);
 
-	        String link = "http://localhost:8089/registration/forgetpassword"+email;
+	        String link = "http://localhost:8089/SpringMVC/registration/forgetpassword"+email;
 	        emailSender.send(email, buildEmailReset("User",link));
 	        return token;
 	    }

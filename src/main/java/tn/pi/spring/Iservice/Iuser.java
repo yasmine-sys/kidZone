@@ -19,7 +19,7 @@ public interface Iuser {
 
 	User retrieveUser (Long id);
 	
-	List<User> getRole(RoleName role);
+	List<User> getJardinEnfant(RoleName role);
 	List<Object[]> countTotalUsersByNom();
 
 }

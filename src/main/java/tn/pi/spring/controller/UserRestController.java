@@ -23,7 +23,7 @@ import tn.pi.spring.entity.User;
 @RestController
 @Api(tags = "User management")
 @RequestMapping("/user")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserRestController {
 
 	@Autowired
@@ -35,14 +35,15 @@ public class UserRestController {
 		return userService.findByEmail(email);
 	}
 	
-	@GetMapping("/Users")
+	// http://localhost:8089/SpringMVC/evenement/retrieve-evenement/8
+	@GetMapping("/getUsers")
 	@ResponseBody
 	public ResponseEntity<List<User>> getUsers(){
 		return ResponseEntity.ok().body(userService.getUsers());
 		
 	}
 		
-	
+		// http://localhost:8089/SpringMVC/evenement/add-evenement
 	@DeleteMapping("/deleteUser/{email}")
 	@ResponseBody
 	public void deleteUser(@PathVariable("email") String email){
@@ -50,28 +51,18 @@ public class UserRestController {
 		
 	}
 
-		
+		// http://localhost:8089/SpringMVC/evenement/remove-evenement/{evenement-id}
 	@PutMapping("/updateUser")
 	@ResponseBody
 	public void updateUser(@RequestBody User user) {
 	userService.updateUser(user);
 	}
 
-		
+		// http://localhost:8089/SpringMVC/evenement/modify-evenement
 	@GetMapping("/findByFirstNameContains/{firstName}")
 	@ResponseBody
 	public List<User> findByFirstNameContains(@PathVariable("firstName") String firstName){
 		return userService.findByFirstNameContains(firstName);
-	}
-	@GetMapping("/findByRole/{role}")
-	@ResponseBody
-	public List<User> getRole(@PathVariable("role") RoleName role){
-		return userService.getRole(role);
-	}
-	@GetMapping("/countRole/{}")
-	@ResponseBody
-	public List<Object[]> countTotalUsersByRole(){
-		return userService.countTotalUsersByRole();
 	}
 		
 }
