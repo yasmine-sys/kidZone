@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import tn.pi.spring.Iservice.IuserManagement;
+import tn.pi.spring.entity.RoleName;
 import tn.pi.spring.entity.User;
 import tn.pi.spring.repository.AppUserRepository;
 @Service
@@ -42,6 +43,19 @@ public class UserService implements IuserManagement {
 		return myRepository.findByFirstNameContains(firstName);
 	}
 
+	@Override
+	public List<User> getRole(RoleName role) {
+		
+		return myRepository.getRole(role);
+	}
+
+	@Override
+	public List<Object[]> countTotalUsersByRole() {
+		// TODO Auto-generated method stub
+		return myRepository.countTotalUsersByRole();
+	}
+
+	
 	
 	
 	
