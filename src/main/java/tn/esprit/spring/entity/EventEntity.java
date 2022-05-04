@@ -1,10 +1,7 @@
-	package tn.esprit.spring.entity;
+package tn.esprit.spring.entity;
 
 import javax.persistence.*;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
@@ -16,48 +13,16 @@ import java.util.*;
 public class EventEntity implements Serializable {
 
 
-	public UserEntity getUser() {
-		return user;
-	}
-
-	public void setUser(UserEntity user) {
-		this.user = user;
-	}
-
-	@Override
-	public String toString() {
-		return "EventEntity [idEvent=" + idEvent + ", titre=" + titre + ", description=" + description + ", dateDebut="
-				+ dateDebut + ", dateFin=" + dateFin + ", prix=" + prix + ", nbrPlaces=" + nbrPlaces
-				+ ", nbrPlacesDisponible=" + nbrPlacesDisponible + ", reservations=" + reservations + ", rating="
-				+ rating + "]";
-	}
-
-	/*public byte[] getImage() {
-		return image;
-	}
-
-	public void setImage(byte[] image) {
-		this.image = image;
-	}*/
-
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idEvent;
 	private String titre;
 	private String description;
-	@JsonFormat(pattern="yyyy-MM-dd")
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date dateDebut;
-	@JsonFormat(pattern="yyyy-MM-dd")
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date dateFin;
+	private LocalDateTime dateDebut;
+	private LocalDateTime dateFin;
 	private float prix;
-	/*@Lob
-    @Column(length = Integer.MAX_VALUE)
-    private byte[] image;*/
+
 	@Column(columnDefinition = "integer default 10", name = "nbrPlaces")
 	private int nbrPlaces;
 	@Column(columnDefinition = "integer default 10", name = "nbrPlacesDisponible")
@@ -70,22 +35,7 @@ public class EventEntity implements Serializable {
 	@JsonIgnore
 	  @OneToMany(mappedBy="event")
 	   private  List<ReservationEntity> reservations;
-	@JsonIgnore
-	  @OneToMany(mappedBy="eventRat")
-	   private  List<Rating> rating;
-	
-	@JsonIgnore
-	  @ManyToOne
-	  private UserEntity user;
-	
-
-	public List<Rating> getRating() {
-		return rating;
-	}
-
-	public void setRating(List<Rating> rating) {
-		this.rating = rating;
-	}
+	 
 
 		public List<ReservationEntity> getReservations() {
 			return reservations;
@@ -94,18 +44,7 @@ public class EventEntity implements Serializable {
 		public void setReservations(List<ReservationEntity> reservations) {
 			this.reservations = reservations;
 		}
-		
-
-		/*@Override
-		public String toString() {
-			return "EventEntity [idEvent=" + idEvent + ", titre=" + titre + ", description=" + description + ", dateDebut="
-					+ dateDebut + ", dateFin=" + dateFin + ", prix=" + prix + ", image= "+ Arrays.toString(image) +", nbrPlaces="
-					+ nbrPlaces + ", nbrPlacesDisponible=" + nbrPlacesDisponible + ", reservations=" + reservations
-					+ ", rating=" + rating + "]";
-		}*/
-		
-
-	public EventEntity(String titre, String description, Date dateDebut, Date dateFin, float prix,
+	public EventEntity(String titre, String description, LocalDateTime dateDebut, LocalDateTime dateFin, float prix,
 			int nbrPlaces, int nbrPlacesDisponible) {
 		super();
 		this.titre = titre;
@@ -115,10 +54,9 @@ public class EventEntity implements Serializable {
 		this.prix = prix;
 		this.nbrPlaces = nbrPlaces;
 		this.nbrPlacesDisponible = nbrPlacesDisponible;
-		//this.image = image;
 	}
 
-	public EventEntity(Long idEvent, String titre, String description, Date dateDebut, Date dateFin,
+	public EventEntity(Long idEvent, String titre, String description, LocalDateTime dateDebut, LocalDateTime dateFin,
 			float prix, int nbrPlaces, int nbrPlacesDisponible) {
 		super();
 		this.idEvent = idEvent;
@@ -129,14 +67,19 @@ public class EventEntity implements Serializable {
 		this.prix = prix;
 		this.nbrPlaces = nbrPlaces;
 		this.nbrPlacesDisponible = nbrPlacesDisponible;
-		//this.image = image;
 	}
 
 	public EventEntity() {
 		super();
 	}
 
-	
+	@Override
+	public String toString() {
+		return "EventEntity [idEvent=" + idEvent + ", titre=" + titre + ", description=" + description + ", dateDebut="
+				+ dateDebut + ", dateFin=" + dateFin + ", prix=" + prix + ", nbrPlaces=" + nbrPlaces
+				+ ", nbrPlacesDisponible=" + nbrPlacesDisponible + "]";
+	}
+
 	public Long getIdEvent() {
 		return idEvent;
 	}
@@ -161,19 +104,19 @@ public class EventEntity implements Serializable {
 		this.description = description;
 	}
 
-	public Date getDateDebut() {
+	public LocalDateTime getDateDebut() {
 		return dateDebut;
 	}
 
-	public void setDateDebut(Date dateDebut) {
+	public void setDateDebut(LocalDateTime dateDebut) {
 		this.dateDebut = dateDebut;
 	}
 
-	public Date getDateFin() {
+	public LocalDateTime getDateFin() {
 		return dateFin;
 	}
 
-	public void setDateFin(Date dateFin) {
+	public void setDateFin(LocalDateTime dateFin) {
 		this.dateFin = dateFin;
 	}
 
@@ -201,5 +144,84 @@ public class EventEntity implements Serializable {
 		this.nbrPlacesDisponible = nbrPlacesDisponible;
 	}
 
-
+	// Getters and setters
+	/*
+	 * public int getId_event() { return id_event; }
+	 * 
+	 * public void setId_event(int id_event) { this.id_event = id_event; }
+	 * 
+	 * public String getTitre() { return titre; }
+	 * 
+	 * public void setTitre(String titre) { this.titre = titre; }
+	 * 
+	 * public String getDescription() { return description; }
+	 * 
+	 * public void setDescription(String description) { this.description =
+	 * description; }
+	 * 
+	 * public LocalDateTime getDateDebut() { return dateDebut; }
+	 * 
+	 * public void setDateDebut(LocalDateTime dateDebut) { this.dateDebut =
+	 * dateDebut; }
+	 * 
+	 * public LocalDateTime getDateFin() { return dateFin; }
+	 * 
+	 * public void setDateFin(LocalDateTime dateFin) { this.dateFin = dateFin; }
+	 * 
+	 * public float getPrix() { return prix; }
+	 * 
+	 * public void setPrix(float prix) { this.prix = prix; }
+	 * 
+	 * public Set<publicite> getPub() { return Pub; }
+	 * 
+	 * public void setPub(Set<publicite> pub) { Pub = pub; }
+	 * 
+	 * public Set<payment> getPayment() { return Payment; }
+	 * 
+	 * public void setPayment(Set<payment> payment) { this.Payment = payment; }
+	 * 
+	 * 
+	 * 
+	 * public int getPlaces() { return places; }
+	 * 
+	 * public void setPlaces(int places) { this.places = places; }
+	 * 
+	 * public String getAlert() { return alert; }
+	 * 
+	 * public void setAlert(String alert) { this.alert = alert; }
+	 * 
+	 * public int getRemaining() { return remaining; }
+	 * 
+	 * public void setRemaining(int remaining) { this.remaining = remaining; }
+	 * 
+	 * public event() { super(); // TODO Auto-generated constructor stub }
+	 * 
+	 * public event(int id_event, String titre, String description, LocalDateTime
+	 * dateDebut, LocalDateTime dateFin, float prix, Set<publicite> pub,
+	 * Set<com.example.waves.entities.payment> payment, int places) { super();
+	 * this.id_event = id_event; this.titre = titre; this.description = description;
+	 * this.dateDebut = dateDebut; this.dateFin = dateFin; this.prix = prix; Pub =
+	 * pub; this.Payment = payment; this.places = places; }
+	 * 
+	 * public event(String titre, String description, LocalDateTime dateDebut,
+	 * LocalDateTime dateFin, float prix, int places, int remaining) { super();
+	 * 
+	 * this.titre = titre; this.description = description; this.dateDebut =
+	 * dateDebut; this.dateFin = dateFin; this.prix = prix; this.places = places;
+	 * this.remaining = remaining; }
+	 * 
+	 * public event(String titre, String description, LocalDateTime dateDebut,
+	 * LocalDateTime dateFin, float prix, int places, int remaining , int etat) {
+	 * super();
+	 * 
+	 * this.titre = titre; this.description = description; this.dateDebut =
+	 * dateDebut; this.dateFin = dateFin; this.prix = prix; this.places = places;
+	 * this.remaining = remaining; this.etat= etat; } public event(Integer iD_EVENT,
+	 * String titre, String description, LocalDateTime dateDebut, LocalDateTime
+	 * dateFin, float prix, int places) { super(); this.id_event = iD_EVENT;
+	 * this.titre = titre; this.description = description; this.dateDebut =
+	 * dateDebut; this.dateFin = dateFin; this.prix = prix; this.places = places; }
+	 * 
+	 * }
+	 */
 }

@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import tn.esprit.spring.entity.EnfantEntity;
 import tn.esprit.spring.entity.EventEntity;
 import tn.esprit.spring.entity.ReservationEntity;
@@ -33,15 +32,15 @@ public class ReservationService implements IReservationService {
 		return enfant.getIdEnfant();
 	}*/
 
-	/*@Override
+	@Override
 	public List<EnfantEntity> findAllEnfantByEventJPQL(Long idEvent) {
 		return reservationRepository.findAllEnfantByEventJPQL(idEvent);
-	}*/
+	}
 
-	/*@Override
+	@Override
 	public List<EventEntity> getAllEventByEnfant(Long idEnfant) {
 		return reservationRepository.getAllEventByEnfant(idEnfant);
-	}*/
+	}
 
 	/*@Override
 	public void ajouterReservation(Long idEnfant, Long idEvent, Date date) {
@@ -92,26 +91,10 @@ public class ReservationService implements IReservationService {
 		reservationRepository.deleteById(id);
 		
 	}
-	
 
 	@Override
 	public List<ReservationEntity> retrieveAllReservationEntities() {
 		return reservationRepository.findAll();
 	}
-
-	@Override
-	public ReservationEntity retrieveReservation (Long id) {
-		return	reservationRepository.findById(id).orElse(null);
-	}
-
-	/*@Override
-	public List<ReservationEntity> pdf() {
-		
-		return (List<ReservationEntity>) reservationRepository.findAll();
-		
-	}*/
-	
-	
-
 
 }

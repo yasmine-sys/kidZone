@@ -14,8 +14,8 @@ public interface IUserService {
 	public UserEntity getUserEntityById(Long id);
 
 	List<UserEntity> getParents(Role role);
-	public List<EnfantEntity> getChildren(Long idUser);
-	//void affecterchildAparent(Long childId, Long parentId) ;
-	//List<UserEntity> getEnfant(Long id);
+
+	void affecterchildAparent(Long childId, Long parentId) ;
+	List<EnfantEntity> getEnfant(Long id);
 	
 }

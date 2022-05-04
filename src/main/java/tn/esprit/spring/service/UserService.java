@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import tn.esprit.spring.entity.EnfantEntity;
 import tn.esprit.spring.entity.Role;
 import tn.esprit.spring.entity.UserEntity;
@@ -19,12 +18,7 @@ public class UserService implements IUserService {
 	@Autowired
 	UserRepository userRepository;
 	@Autowired
-	EnfantRepository enfantRepository;
-
-	@Override
-	public List<EnfantEntity> getChildren(Long idUser) {
-		return userRepository.getChildren(idUser);
-	}
+	EnfantRepository enfantrepository;
 
 	@Override
 	public List<UserEntity> getAllUserEntitys() {
@@ -61,26 +55,18 @@ public class UserService implements IUserService {
 	}
 	
     //@Transactional
-	/*@Override
+	@Override
 	public void affecterchildAparent(Long childId, Long parentId) {
-		UserEntity p = userRepository.findById(parentId).orElse(null);
-		EnfantEntity c = enfantRepository.findById(childId).orElse(null);
-		p.setEnfant(c);
-		enfantrepository.save(c);
+		UserEntity p = userRepository.findById(parentId).get();
+		EnfantEntity c = enfantrepository.findById(childId).get();
+		p.getEnfant().add(c);
+		userRepository.save(p);
 	
-	}*/
-	
-	/*	@Override
-	public void assignProduitToStock(Long idProduit, Long idStock) {
-		Stock st = stockRepository.findById(idStock).orElse(null);
-		Produit product = produitRepository.findById(idProduit).orElse(null);
-		product.setStock(st);
-		produitRepository.save(product);
-	}*/
+	}
 
-	/*@Override
+	@Override
 	public List<EnfantEntity> getEnfant(Long id) {
 		return (List<EnfantEntity>) userRepository.getChildren(id);
-	}*/
+	}
 
 }

@@ -4,8 +4,6 @@ import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -15,17 +13,15 @@ public class ReservationPK implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	//private Long id;
 	private Long idEnfant;
 
 	private Long idEvent;
 	
+	private Long id;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
-	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
 	private Date dateReservation;
-	
 	
 
 	@Override
@@ -39,17 +35,17 @@ public class ReservationPK implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "ReservationPK [idEnfant=" + idEnfant + ", idEvent=" + idEvent + ", dateReservation="
+		return "ReservationPK [idEnfant=" + idEnfant + ", idEvent=" + idEvent + ", id=" + id + ", dateReservation="
 				+ dateReservation + "]";
 	}
 
-/*	public Long getId() {
+	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}*/
+	}
 
 	@Override
 	public boolean equals(Object obj) {

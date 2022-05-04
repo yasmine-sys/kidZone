@@ -1,8 +1,6 @@
 package tn.esprit.spring.entity;
 import javax.persistence.*;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
@@ -12,29 +10,35 @@ import java.util.*;
 @Entity
 @Table(name = "reservation")
 public class ReservationEntity  implements Serializable {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	
 	private static final long serialVersionUID = 1L;
+	@EmbeddedId
+	private ReservationPK reservationPK;
 	
 
 	
 	//idEvent est a la fois primary key et foreign key
 	@JsonIgnore
 	@ManyToOne
-    @JoinColumn(name = "idEvent", referencedColumnName = "idEvent")
+    @JoinColumn(name = "idEvent", referencedColumnName = "idEvent", insertable=false, updatable=false)
 	private EventEntity event;
 	
 	//idEnfant est a la fois primary key et foreign key
 	@JsonIgnore
 	@ManyToOne
-    @JoinColumn(name = "idEnfant", referencedColumnName = "idEnfant")
+    @JoinColumn(name = "idEnfant", referencedColumnName = "idEnfant", insertable=false, updatable=false)
 	private EnfantEntity enfant;
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date dateReservation;
+
 	private boolean isValide;
 	
+	
+	public ReservationPK getReservationPK() {
+		return reservationPK;
+	}
+
+	public void setReservationPK(ReservationPK reservationPK) {
+		this.reservationPK = reservationPK;
+	}
 
 	public EventEntity getEvent() {
 		return event;
@@ -60,13 +64,20 @@ public class ReservationEntity  implements Serializable {
 		this.isValide = isValide;
 	}
 
-	public ReservationEntity( EventEntity event, EnfantEntity enfant, boolean isValide) {
+	public ReservationEntity(ReservationPK reservationPK, EventEntity event, EnfantEntity enfant, boolean isValide) {
 		super();
+		this.reservationPK = reservationPK;
 		this.event = event;
 		this.enfant = enfant;
 		this.isValide = isValide;
 	}
 
+	public ReservationEntity(EventEntity event, EnfantEntity enfant, boolean isValide) {
+		super();
+		this.event = event;
+		this.enfant = enfant;
+		this.isValide = isValide;
+	}
 
 	public ReservationEntity(EventEntity event, EnfantEntity enfant) {
 		super();
@@ -76,46 +87,6 @@ public class ReservationEntity  implements Serializable {
 
 	public ReservationEntity() {
 		super();
-	}
-
-	public Date getDateReservation() {
-		return dateReservation;
-	}
-
-	public void setDateReservation(Date dateReservation) {
-		this.dateReservation = dateReservation;
-	}
-
-	public ReservationEntity(EventEntity event, EnfantEntity enfant, Date dateReservation, boolean isValide) {
-		super();
-		this.event = event;
-		this.enfant = enfant;
-		this.dateReservation = dateReservation;
-		this.isValide = isValide;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public ReservationEntity(Long id, EventEntity event, EnfantEntity enfant, Date dateReservation, boolean isValide) {
-		super();
-		this.id = id;
-		this.event = event;
-		this.enfant = enfant;
-		this.dateReservation = dateReservation;
-		this.isValide = isValide;
-	}
-
-	@Override
-	public String toString() {
-		return "ReservationEntity [id=" + id + ", event=" + event + ", enfant=" + enfant + ", dateReservation="
-				+ dateReservation + ", isValide=" + isValide + "]";
 	}	
-	
 	
 }

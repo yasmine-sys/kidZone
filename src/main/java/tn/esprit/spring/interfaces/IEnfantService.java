@@ -3,7 +3,6 @@ package tn.esprit.spring.interfaces;
 import java.util.List;
 
 import tn.esprit.spring.entity.EnfantEntity;
-import tn.esprit.spring.entity.EventEntity;
 
 
 public interface IEnfantService {
@@ -14,7 +13,4 @@ public interface IEnfantService {
 	EnfantEntity updateChild(EnfantEntity c );
 	EnfantEntity retrieveChild(String id);
 	void affecterchildAparent(Long idEnfant, Long parentId) ;
-	public List<EnfantEntity> findAllEnfantByEventJPQL(Long idEvent);
-	public void addEnfantByUser(EnfantEntity s, Long idUser);
-	
 }

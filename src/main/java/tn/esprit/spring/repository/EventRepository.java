@@ -34,21 +34,16 @@ public interface EventRepository extends JpaRepository<EventEntity, Long> {
 	public List<EventEntity> getAllEventOrdonneParDate();
 	
 	//searchEvent by titre or descp or prix
-	/*@Query(value="SELECT * from event e where(e.titre like %:word%" 
+	@Query(value="SELECT * from event e where(e.titre like %:word%" 
 					+ "OR e.description like %:word%"
-					+ "OR e.prix like %:word% )" , nativeQuery =true)*/
-	@Query(value="SELECT e.* from event e where e.titre like :word", nativeQuery =true)
-	public List<EventEntity> Search(@Param("word") String word);
+					+ "OR e.prix like %:word% )" , nativeQuery =true)
+	public List<EventEntity> searchEvent(@Param("word") String word);
 	
 	//update event titre by id
 	@Modifying
     @Transactional
     @Query(value="UPDATE event e SET e.titre=:titre where e.id_event=:idEvent", nativeQuery =true)
     public void mettreAjourTitreByEVentIdJPQL(@Param("titre")String titre, @Param("idEvent")Long idEvent);
-	
-	//getAllEventByEnfant
-		@Query(value="SELECT DISTINCT ev.* from event ev , enfant e , reservation r where r.id_enfant=e.id_enfant AND r.id_event=ev.id_event AND r.id_enfant=:idEnfant", nativeQuery =true)
-		public List<EventEntity> getAllEventByEnfant(@Param("idEnfant")Long idEnfant);
 
 
 }
