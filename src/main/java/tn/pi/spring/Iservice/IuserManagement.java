@@ -1,6 +1,8 @@
 package tn.pi.spring.Iservice;
 
 import java.util.List;
+
+import tn.pi.spring.entity.RoleName;
 import tn.pi.spring.entity.User;
 
 
@@ -15,6 +17,8 @@ public interface IuserManagement {
 	public void updateUser(User user);
 	
 	List<User> findByFirstNameContains(String firstName);
+	List<User> getRole(RoleName role);
+	List<Object[]> countTotalUsersByRole();
 	
 	//List<User> findByFirstNameOrLastNameContains(String firstName,String lastName);
 
