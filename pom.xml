@@ -18,7 +18,34 @@
 		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
+<<<<<<< HEAD
 		<dependency>
+=======
+	
+	<dependency>
+	
+
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        </dependency>  
+	
+	   <dependency>
+	   <groupId>io.springfox</groupId>
+	   <artifactId> springfox-boot-starter </artifactId>
+	   <version> 3.0.0 </version>
+	   </dependency>
+	   <dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-core</artifactId>
+     </dependency>
+        <dependency>
+    		<groupId>com.auth0</groupId>
+    		<artifactId>java-jwt</artifactId>
+    		<version>3.18.1</version>
+		</dependency>
+	
+	   <dependency>
+>>>>>>> 13a1173d93c03c94234f1d03fdd4a625cd7f9c85
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
