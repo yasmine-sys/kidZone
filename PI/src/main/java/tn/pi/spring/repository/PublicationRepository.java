@@ -1,8 +1,12 @@
 package tn.pi.spring.repository;
 
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.awt.print.Pageable;
+import java.util.Collection;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 //AUTHOR ABDESSALEM BENCHRIFA
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +15,12 @@ import tn.pi.spring.entity.Publication;
 
 @Repository
 public interface PublicationRepository extends JpaRepository<Publication, Integer> {
+	
+	   
+
+	   Publication findFirstByOrderByIdDesc();
+
+	   
 	
 	
 	/*//search

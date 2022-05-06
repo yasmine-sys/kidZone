@@ -12,7 +12,7 @@ import tn.pi.spring.entity.Commentaire;
 
 
 @Repository
-public interface CommentaireRepository extends JpaRepository<Commentaire, Long> {
+public interface CommentaireRepository extends JpaRepository<Commentaire, Integer> {
 	
 	@Query(value="SELECT comments.* from commentaire join like_comments on comments.id = like_comments.com_id where pub_id_id = :publicationId GROUP by like_comments.com_id order by COUNT(like_comments.com_id) DESC",nativeQuery=true)
 	List<Commentaire> RelevantComments(@Param("publicationId") int id);

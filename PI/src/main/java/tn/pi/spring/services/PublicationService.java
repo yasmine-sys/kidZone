@@ -1,11 +1,13 @@
 package tn.pi.spring.services;
 
-import java.sql.Date;
+
+import java.io.IOException;
+
 import java.util.List;
 
-import org.springframework.data.domain.Page;
+import org.springframework.web.multipart.MultipartFile;
 
-import tn.pi.spring.entity.Commentaire;
+
 import tn.pi.spring.entity.Publication;
 
 public interface PublicationService {
@@ -17,6 +19,7 @@ public interface PublicationService {
 	public void UpdatePublicationById(Publication pub, int id);
 	public void DeletePublication(int id);
 	public Publication GetPubById(int pubId);
+	public void uploadImage(final MultipartFile file) throws IOException ;
 	/*public int getNombrePublicationJPQL();
 	List<Commentaire> findCommentaire(Long id);
 	List<Publication> getAllPublications();

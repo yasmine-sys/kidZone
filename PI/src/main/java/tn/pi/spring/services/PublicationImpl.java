@@ -2,10 +2,16 @@ package tn.pi.spring.services;
 
 
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 import tn.pi.spring.entity.Publication;
@@ -69,6 +75,7 @@ public class PublicationImpl implements PublicationService {
 	public void UpdatePublicationById(Publication pub, int id) {
 		// TODO Auto-generated method stub
 		pub.setUpdatedAt(new Date());
+		pub.setCreatedAt(new Date());
 		this.publicationRep.save(pub);
 	}
 
@@ -96,7 +103,24 @@ public class PublicationImpl implements PublicationService {
 		 publicationRep.save(pub);
 		 return "pub";
 	}
+	
+	
+	 public void uploadImage(final MultipartFile file) throws IOException {
+	        UUID imgGeneratedId = UUID.nameUUIDFromBytes(file.getBytes());
+	        File convertFile = new File("C:\\Angular\\Kiddy\\src\\assets\\photos\\" + imgGeneratedId + file.getOriginalFilename());
+	        Publication foundPost = publicationRep.findFirstByOrderByIdDesc();
+	        foundPost.setImageUrl("./assets/images/" + imgGeneratedId + file.getOriginalFilename());
+	        convertFile.createNewFile();
+	        FileOutputStream fout = new FileOutputStream(convertFile);
+	        fout.write(file.getBytes());
+	        fout.close();
+	        publicationRep.save(foundPost);
 }
+	 
+	 
+}
+	 
+
 
 
 

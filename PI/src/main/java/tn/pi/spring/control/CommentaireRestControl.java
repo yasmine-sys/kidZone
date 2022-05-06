@@ -3,6 +3,7 @@ package tn.pi.spring.control;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +22,7 @@ import tn.pi.spring.repository.CommentaireRepository;
 
 import tn.pi.spring.services.CommentaireService;
 
-
+@CrossOrigin(origins= "http://localhost:4200")
 @RestController
 @RequestMapping("/commentaire")
 @Api(tags = "Gestion commentaires")
@@ -53,7 +54,7 @@ public class CommentaireRestControl
 	
 	@PostMapping("/AddComments/{userId}/{pubId}")
 	public String AddCommentaire(@RequestBody Commentaire com,@PathVariable(value = "userId") int userId,@PathVariable(value = "pubId") int pubId){
-		comentaireService.AddComments(userId, com, pubId);
+		comentaireService.AddComments(com,userId, pubId);
 					return "comments added succesfully";
 
 	}
@@ -87,14 +88,14 @@ public class CommentaireRestControl
 		return comentaireService.updateCommentaire(commentaire);
 	}
 
-	@DeleteMapping("/remove-commentaire/{commentaire-id}")
-	public void removeCommentaire(@PathVariable("commentaire-id") Long commentaireId) 
+@DeleteMapping("/remove-commentaire/{commentaire-id}")
+	public void removeCommentaire(@PathVariable("commentaire-id") int commentaireId) 
 	{
 		comentaireService.deleteCommentaire(commentaireId);
 	}
 
 	@GetMapping("/retrieve-commentaire/{commentaire-id}")
-	public Commentaire retrieveCommentaire(@PathVariable("commentaire-id") Long commentaireId) 
+	public Commentaire retrieveCommentaire(@PathVariable("commentaire-id") int commentaireId) 
 	{
 		return comentaireService.retrieveCommentaire(commentaireId);
 	}

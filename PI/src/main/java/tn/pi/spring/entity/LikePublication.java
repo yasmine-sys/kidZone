@@ -17,6 +17,7 @@ public class LikePublication {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int like_id;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;

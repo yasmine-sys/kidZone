@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
-import tn.pi.spring.model.ChatMessage;
-import tn.pi.spring.model.MessageType;
+import tn.pi.spring.entity.ChatMessage;
+import tn.pi.spring.entity.MessageType;
 
 
 @Component

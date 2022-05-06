@@ -64,6 +64,8 @@ public class Publication implements Serializable  {
 	private String title;
 	@Column
 	private String publication_txt;
+	
+	 private String imageUrl;
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user", nullable=false)
@@ -201,6 +203,15 @@ public class Publication implements Serializable  {
 
 */
 
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+	
 	public String getTitle() {
 		return title;
 	}

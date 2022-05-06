@@ -1,5 +1,7 @@
 package tn.pi.spring.services;
 
+
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,15 +37,18 @@ public class CommentaireServiceImpl implements CommentaireService {
 	UserRepository userRep;
 	
 	@Override
-	public Commentaire AddComments(int user_id,Commentaire com,int pub_id) {
+	public Commentaire AddComments(Commentaire com,int user_id,int pub_id) {
 		// TODO Auto-generated method stub
 
 		userRep.findById((long) user_id).map(user -> {
 			com.setUser(user);
+			com.setCreatedAt(new Date());
+			com.setUpdatedAt(new Date());
 			return com_rep.save(com);
 		}).get();
 		return publicationRep.findById(pub_id).map(pub -> {
 			com.setPub_id(pub);
+			
 			return com_rep.save(com);
 		}).get();
 	}
@@ -85,19 +90,19 @@ public class CommentaireServiceImpl implements CommentaireService {
 	}
 
 	@Override
-	public Commentaire retrieveCommentaire(Long id) {
+	public Commentaire retrieveCommentaire(int id) {
 		// TODO Auto-generated method stub
 		//return null;
 		return (commentaireRepository.findById(id).get());
 	}
 
 	@Override
-	public void deleteCommentaire(Long id) {
+	public void deleteCommentaire(int id) {
 		commentaireRepository.deleteById(id);		
 	}
 
 	@Override
-	public Optional<Commentaire> findById(Long id) {
+	public Optional<Commentaire> findById(int id) {
 		 return commentaireRepository.findById(id);
 	}
 
@@ -116,7 +121,7 @@ public class CommentaireServiceImpl implements CommentaireService {
 			if (lcomments_rep.LikesComments(com_id, user_id)==0) {
 				if (user2.getId()==user_id) {
 					
-					commentaireRepository.findById((long) com_id).map(c ->{
+					commentaireRepository.findById(com_id).map(c ->{
 						like_com.setInteractionType(Emoji.Like);
 						like_com.setUser(user2);
 						like_com.setComm(c);
@@ -142,7 +147,7 @@ public class CommentaireServiceImpl implements CommentaireService {
 			if (lcomments_rep.LoveComments(com_id, user_id)==0) {
 				if (user2.getId()==user_id) {
 					
-					commentaireRepository.findById((long) com_id).map(c ->{
+					commentaireRepository.findById(com_id).map(c ->{
 						like_com.setInteractionType(Emoji.love);
 						like_com.setUser(user2);
 						like_com.setComm(c);
@@ -168,7 +173,7 @@ public class CommentaireServiceImpl implements CommentaireService {
 			if (lcomments_rep.HahaComments(com_id, user_id)==0) {
 				if (user2.getId()==user_id) {
 					
-					commentaireRepository.findById((long) com_id).map(c ->{
+					commentaireRepository.findById(com_id).map(c ->{
 						like_com.setInteractionType(Emoji.haha);
 						like_com.setUser(user2);
 						like_com.setComm(c);
@@ -194,7 +199,7 @@ public class CommentaireServiceImpl implements CommentaireService {
 			if (lcomments_rep.SadComments(com_id, user_id)==0) {
 				if (user2.getId()==user_id) {
 					
-					commentaireRepository.findById((long) com_id).map(c ->{
+					commentaireRepository.findById(com_id).map(c ->{
 						like_com.setInteractionType(Emoji.sad);
 						like_com.setUser(user2);
 						like_com.setComm(c);
@@ -220,7 +225,7 @@ public class CommentaireServiceImpl implements CommentaireService {
 			if (lcomments_rep.AngryComments(com_id, user_id)==0) {
 				if (user2.getId()==user_id) {
 					
-					commentaireRepository.findById((long) com_id).map(c ->{
+					commentaireRepository.findById(com_id).map(c ->{
 						like_com.setInteractionType(Emoji.angry);
 						like_com.setUser(user2);
 						like_com.setComm(c);

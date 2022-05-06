@@ -6,24 +6,25 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import tn.pi.spring.model.ChatMessage;
-
-
-
-
-@Controller
+import io.swagger.annotations.Api;
+import tn.pi.spring.entity.ChatMessage;
+@RestController
+@RequestMapping("/chat")
+@Api(tags = "Gestion chat")
 public class ChatController {
-	
-	
-	
-	
-	
+	@GetMapping("test")
+	public void test() {
+		
+	}
+	@GetMapping("hello")
 	@MessageMapping("/chat.sendMessage")
 	@SendTo("/topic/public")
 	public ChatMessage sendMessage(@Payload ChatMessage chatMessagePojo) {
+		
 		return chatMessagePojo;
 	}
 
@@ -35,6 +36,5 @@ public class ChatController {
 		headerAccessor.getSessionAttributes().put("username", chatMessagePojo.getSender());
 		return chatMessagePojo;
 	}
-	
-}
 
+}

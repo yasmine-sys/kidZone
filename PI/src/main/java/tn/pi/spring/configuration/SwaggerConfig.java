@@ -26,7 +26,7 @@ public class SwaggerConfig {
 				//Initialiser une classe de ApiSelectorBuilder pour donner l’accès aux méthodes de personnalisation.
 
 				//.apis(RequestHandlerSelectors.any()) //any: documenter toutes les classes dans tous les   packages
-				.apis(RequestHandlerSelectors.basePackage("tn.pi.spring")) 
+				.apis(RequestHandlerSelectors.basePackage("tn.pi.spring.control")) 
 				// basePackage permet de demander à Swagger de ne rien documenter en dehors du package "com.esprit.spring".
 
 				.paths(PathSelectors.any())

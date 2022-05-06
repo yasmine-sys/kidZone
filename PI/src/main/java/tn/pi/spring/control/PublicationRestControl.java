@@ -8,6 +8,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.models.media.MediaType;
 import tn.pi.spring.configuration.APIResponse;
 import tn.pi.spring.entity.Commentaire;
 
@@ -35,7 +38,7 @@ import tn.pi.spring.repository.UserRepository;
 import tn.pi.spring.services.PublicationService;
 
 
-@CrossOrigin(origins= "http://localhost:4200")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/publication")
 @Api(tags = "Gestion Publications")
@@ -51,11 +54,17 @@ public class PublicationRestControl {
 	CommentaireRepository com_rep;
 	
 	
-	private byte[] bytes;
+	/*private byte[] bytes;
 	@PostMapping("/upload")
 	public void uploadImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
 		this.bytes = file.getBytes();
-	}
+	}*/
+	
+	 @PostMapping(value = "/upload")
+	    public ResponseEntity<Object> uploadImageOnServer(@RequestParam("file") MultipartFile file) throws IOException {
+	        this.pub_service.uploadImage(file);
+	        return new ResponseEntity<>("File is uploaded successfully", HttpStatus.OK);
+	    }
 	
 	
 	@GetMapping("/RetrievePublication")
