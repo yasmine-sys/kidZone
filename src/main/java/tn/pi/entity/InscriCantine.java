@@ -1,7 +1,7 @@
 package tn.pi.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -36,7 +37,7 @@ public class InscriCantine implements Serializable {
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	@Column(name="idinscri")
 	private Long idinscri;
-	@Column(name="DateInscriCantine")
+	@Temporal(TemporalType.DATE)
 	private Date dateinscri;
 	@Enumerated(EnumType.STRING)
 	private Abonnement abonnement;

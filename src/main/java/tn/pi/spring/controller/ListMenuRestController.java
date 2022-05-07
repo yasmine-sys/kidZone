@@ -93,8 +93,13 @@ public class ListMenuRestController {
 		@GetMapping(value="/getmenu")
 		@ResponseBody
 		 public  List<ListMenu> getRandArticles(){
-			
 			return menurep.findRandom();
 		}
 
 }
+//for(int i=0; i<ListMenu.size();i++)
+//{
+	//if(ListMenu.get(rand)==1)
+//{	
+//return menurep.findRandom();
+//rand ++;
