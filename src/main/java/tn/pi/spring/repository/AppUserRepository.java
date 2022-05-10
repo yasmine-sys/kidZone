@@ -17,7 +17,6 @@ import tn.pi.spring.entity.User;
 @Transactional(readOnly = true)
 public interface AppUserRepository extends JpaRepository<User, Long> {
 
-	
 	Optional<User> findByEmail(String email);
 	
 	 

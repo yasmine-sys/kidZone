@@ -1,5 +1,8 @@
 package tn.pi.spring.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,15 +19,17 @@ import tn.pi.spring.registration.RegistrationService;
 @RestController
 @RequestMapping(path ="/registration")
 @AllArgsConstructor
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 public class RegistrationController {
 	
 
 	private final RegistrationService registrationService;
 	
 	@PostMapping
-	public String register(@RequestBody RegistrationRequest request) {
-		return registrationService.register(request);
+	public Map<String, String> register(@RequestBody RegistrationRequest request) {
+		Map<String, String> temp = new HashMap<String, String>();
+		temp.put("token", registrationService.register(request));
+		return temp;
 	}
 	
 	 @GetMapping(path = "/confirm")
@@ -33,14 +38,19 @@ public class RegistrationController {
 	    }
 	 
 	 @GetMapping("/forgetpassword/{email}")
-	    public String forgetpassword(@PathVariable("email") String email) {
-	        return registrationService.forgetpassword(email);
+	    public Map<String, String>  forgetpassword(@PathVariable("email") String email) {
+		 Map<String, String> temp = new HashMap<String, String>();
+		 temp.put("token", registrationService.forgetpassword(email));
+	        return temp;
 	    }
 	    
 	    
 	    // http://localhost:8089/SpringMVC/registration/reset
 	    @GetMapping("/reset/{token}/{email}/{password}")
-	    public String reset(@PathVariable("token") String token,@PathVariable("email") String email,@PathVariable("password") String password) {
-	        return registrationService.resetPassword(token,email,password);
+	    public Map<String, String> reset(@PathVariable("token") String token,@PathVariable("email") String email,@PathVariable("password") String password) {
+	    	Map<String, String> temp = new HashMap<String, String>();
+	    	 temp.put("token", registrationService.resetPassword(token,email,password));
+		        return temp;
+	    	
 	    }
 }

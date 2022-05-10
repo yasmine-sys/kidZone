@@ -30,8 +30,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class CustomAuthorizationFilter extends OncePerRequestFilter {@Override
+public class CustomAuthorizationFilter extends OncePerRequestFilter {
 	
+	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 	
@@ -44,12 +45,12 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {@Override
 			try {
 				String toker = authorizationHeader.substring("Bearer ".length());
 				Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
-				JWTVerifier verifier = JWT.require(algorithm).build();
-				
+				JWTVerifier verifier = JWT.require(algorithm).build();				
 				DecodedJWT decodedJWT = verifier.verify(toker);
 				String username = decodedJWT.getSubject();
 				String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
 				Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+				
 				stream(roles).forEach(role ->{
 					authorities.add(new SimpleGrantedAuthority(role));
 					
@@ -59,7 +60,8 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {@Override
 				
 				SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 				filterChain.doFilter(request, response);
-			} catch (Exception e) {
+			   } 
+		    catch (Exception e) {
 				log.error("error loging in",e.getMessage());
 				response.setHeader("error", e.getMessage());
 				//response.sendError(FORBIDDEN.value());
@@ -70,6 +72,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {@Override
 				new ObjectMapper().writeValue(response.getOutputStream(),error);
 			}
 		}else{
+			
 			filterChain.doFilter(request, response);
 		}
 	}

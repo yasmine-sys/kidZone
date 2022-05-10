@@ -3,41 +3,43 @@ package tn.pi.spring;
 import java.util.Arrays;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-<<<<<<< HEAD
-=======
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
->>>>>>> 13a1173d93c03c94234f1d03fdd4a625cd7f9c85
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
-@EnableWebMvc
-@EntityScan( basePackages = {"tn.pi.spring.entity"})
+//@EnableJpaRepositories("healthchecker")
+//@EnableWebMvc
+//@Configuration
 @SpringBootApplication
 public class PiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PiApplication.class, args);
 	}
-	 @Bean
+	
+	
+	/*@Bean
 	    public WebMvcConfigurer corsConfigurer() 
 	    {
 	        return new WebMvcConfigurer() {
 	            @Override
 	            public void addCorsMappings(CorsRegistry registry) {
-	                registry.addMapping("/**").allowedOrigins("http://localhost:4200");
+	                registry.addMapping("/**")
+	                .allowedOrigins("http://localhost:4200");
 	            }
 	        };
 	    }
 
-	/*@Bean
+	@Bean
 	public CorsFilter corsFilter() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 		corsConfiguration.setAllowCredentials(true);

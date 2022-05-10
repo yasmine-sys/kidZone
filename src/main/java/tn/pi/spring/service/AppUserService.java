@@ -35,23 +35,31 @@ public class AppUserService implements UserDetailsService {
 
 	
 	private final static String USER_NOT_FOUND_MSG = "user with email %s not found";
-    private final AppUserRepository appUserRepository;
+    private  AppUserRepository appUserRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
     private final BlacklistRepository blacklistRepository;
 
     @Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
 		User user = appUserRepository.findByEmail(email).orElse(null);
-    	if (user==null) {
+		System.out.println(email);
+
+
+		System.out.println(user);
+		if (user==null) {
+    		
     		log.error("user not found in the data base");
     		throw new UsernameNotFoundException("user not found in the data base");
     		
     	}else {
-    		log.info("user found in the data base");
+    		log.info("user !found in the data base");
 
     	}
     	List<SimpleGrantedAuthority> authorities = getUserAuthority(user.getRole().name());
+		System.out.println(user.getUsername());
+
     
 		return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(), authorities);    }
     
