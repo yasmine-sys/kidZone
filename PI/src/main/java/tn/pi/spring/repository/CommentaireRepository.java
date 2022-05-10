@@ -20,6 +20,8 @@ public interface CommentaireRepository extends JpaRepository<Commentaire, Intege
 	
 	
 	
+	
+	
 	//Collection<Commentaire> findByPublication_Id(final Long publicationId);
 	/*//lister les commentaires by publiation 
 		@Query(value="r.* from publication pb , commentaire r where r.id_publication=pb.id_publication ", nativeQuery =true)

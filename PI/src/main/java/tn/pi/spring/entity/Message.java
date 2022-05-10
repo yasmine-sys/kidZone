@@ -30,6 +30,8 @@ public class Message implements Serializable {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int messageId;
+	private String greeting;
+
 
 	//@NonNull private Date dateEnvoie;
 	@Column
