@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @EnableWebMvc
@@ -25,18 +26,22 @@ public class Jardin implements Serializable {
 
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private long JardinId;
+	private long jardin_id;
 
-	 private Date dateCreation; 
-	 private String nom;
-	 private String localisation;
+	 private String nom; 
+ 	 private String localisation;
 	 private String description;
 	 private String email;
-	 private String password;
+	 @JsonFormat(pattern="yyyy-MM-dd")
+	 private Date datecreation;
 	 private Long nbremployee;
 	 private Long nbrenfant;
 	 private Long enfantmax;
 	 private Long telephone;
+	  
+	 
+
+	 
 	public Jardin() {
 		
 	}
@@ -44,51 +49,16 @@ public class Jardin implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy="jardin") 
 	private List<Cout> couts;
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public Jardin(Date dateCreation, String nom, String localisation, String description, String email, String password,
-			Long nbremployee, Long nbrenfant, Long enfantmax, Long telephone, List<Cout> couts) {
-		super();
-		this.dateCreation = dateCreation;
-		this.nom = nom;
-		this.localisation = localisation;
-		this.description = description;
-		this.email = email;
-		this.password = password;
-		this.nbremployee = nbremployee;
-		this.nbrenfant = nbrenfant;
-		this.enfantmax = enfantmax;
-		this.telephone = telephone;
-		this.couts = couts;
+
+
+
+
+	public long getJardin_id() {
+		return jardin_id;
 	}
 
-	public long getJardinId() {
-		return JardinId;
-	}
-
-	public void setJardinId(long jardinId) {
-		JardinId = jardinId;
-	}
-
-	public Date getDateCreation() {
-		return dateCreation;
-	}
-
-	public void setDateCreation(Date dateCreation) {
-		this.dateCreation = dateCreation;
+	public void setJardin_id(long jardin_id) {
+		this.jardin_id = jardin_id;
 	}
 
 	public String getNom() {
@@ -123,12 +93,12 @@ public class Jardin implements Serializable {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
+	public Date getDatecreation() {
+		return datecreation;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setDatecreation(Date datecreation) {
+		this.datecreation = datecreation;
 	}
 
 	public Long getNbremployee() {
@@ -175,9 +145,34 @@ public class Jardin implements Serializable {
 		return serialVersionUID;
 	}
 
+	public Jardin(String nom, String localisation, String description, String email, Date datecreation,
+			Long nbremployee, Long nbrenfant, Long enfantmax, Long telephone, List<Cout> couts) {
+		super();
+		this.nom = nom;
+		this.localisation = localisation;
+		this.description = description;
+		this.email = email;
+		this.datecreation = datecreation;
+		this.nbremployee = nbremployee;
+		this.nbrenfant = nbrenfant;
+		this.enfantmax = enfantmax;
+		this.telephone = telephone;
+		this.couts = couts;
+	}
 
 
 
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 

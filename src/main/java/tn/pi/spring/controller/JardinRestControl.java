@@ -1,12 +1,14 @@
 package tn.pi.spring.controller;
 
 import java.util.List;
+
+
 import java.util.stream.Collectors;
 
 import javax.mail.MessagingException;
-
+import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.ui.Model;
-import io.swagger.annotations.Api;
+
 import tn.pi.spring.Iservice.CoutService;
 import tn.pi.spring.Iservice.JardinService;
 import tn.pi.spring.Iservice.ReclamationService;
@@ -25,10 +27,13 @@ import tn.pi.spring.entity.Cout;
 import tn.pi.spring.entity.Jardin;
 import tn.pi.spring.entity.Reclamation;
 
+
+
+@CrossOrigin(origins = "http://localhost:4200")
 @EnableWebMvc
 @RestController
 @RequestMapping("/Jardin")
-@Api(tags = "Gestion Jardins")
+
 public class JardinRestControl 
 {
 
@@ -58,16 +63,16 @@ public class JardinRestControl
 		return JardinService.updateJardin(p);
 	}
 
-	@DeleteMapping("/remove-Jardin/{Jardin-id}")
-	public void removeJardin(@PathVariable("Jardin-id") Long JardinId) 
+	@DeleteMapping("/remove-Jardin/{jardin-id}")
+	public void removeJardin(@PathVariable("jardin-id") Long jardin_id) 
 	{
-		JardinService.deleteJardin(JardinId);
+		JardinService.deleteJardin(jardin_id);
 	}
 
-	@GetMapping("/retrieve-Jardin/{Jardin-id}")
-	public Jardin retrieveJardin(@PathVariable("Jardin-id") Long JardinId) 
+	@GetMapping("/retrieve-Jardin/{jardin-id}")
+	public Jardin retrieveJardin(@PathVariable("jardin-id") Long jardin_id) 
 	{
-		return JardinService.retrieveJardin(JardinId);
+		return JardinService.retrieveJardin(jardin_id);
 	}
 	@PutMapping("/modify-Jardinn/{Jardin-id}")
 	public void updatejar(@PathVariable("Jardin-id")Long JardinId,@RequestBody Jardin p){
