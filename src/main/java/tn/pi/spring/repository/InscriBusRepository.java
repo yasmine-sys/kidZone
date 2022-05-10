@@ -16,6 +16,7 @@ public interface InscriBusRepository extends CrudRepository<InscriBus,Long> {
 		@Query("SELECT e FROM InscriBus e   WHERE   e.buss.idBus=:idBus")
 		List<InscriBus> getEnfantsByBus(@Param("idBus")Long idBus);
 		
+		
 		//nombre des enfants inscrits
 		@Query("SELECT count (*) from InscriBus")
 		public int getNombreEnfantsInscriJPQL();
@@ -23,5 +24,10 @@ public interface InscriBusRepository extends CrudRepository<InscriBus,Long> {
 		//nombre des enfants inscrits ByBus
 		@Query("SELECT count (*) from InscriBus WHERE   buss.idBus=:idBus")
 		public int getNombreEnfantsInscriByBusJPQL(@Param("idBus")Long idBus);
-
+		
+		//Afficher la liste des trajets par ville
+		//@Query("SELECT e FROM Trajet e   WHERE   e.enfants.ville=:ville")
+		//List<InscriBus> getTrajetsville(@Param("ville")Long idBus);
+		
+	
 }

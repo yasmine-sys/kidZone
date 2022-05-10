@@ -44,7 +44,7 @@ public class InscriBusPdf {
         cell.setPhrase(new Phrase("Prénom", font));
         table.addCell(cell);
          
-        cell.setPhrase(new Phrase("Bus Id", font));
+        cell.setPhrase(new Phrase("Num Bus", font));
         table.addCell(cell);
         
     }

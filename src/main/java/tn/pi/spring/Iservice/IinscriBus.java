@@ -8,16 +8,22 @@ public interface IinscriBus {
 	List<InscriBus> retrieveAllInscriBus();
 
 	InscriBus addInscriBus (InscriBus i);
+	
+	InscriBus addInscriBus1 (InscriBus i,Long idBus,Long idEnfant);
 
 	void deleteInscriBus (Long id);
 
 	InscriBus updateInscriBus (InscriBus i);
 
 	InscriBus retrieveInscriBus (Long id);
-	
+		
 	List<InscriBus> getEnfantsByBus(Long idBus);
 	
 	public int getNombreEnfantsInscriJPQL();
 	
 	public int getNombreEnfantsInscriByBusJPQL(Long idBus);
+	
+	public void ajouterEtAffecterInscriptionAEnfantetBUS (InscriBus inscription,Long idBus,Long idEnfant);
+	
+	//List<InscriBus> getTrajetsville(String ville);
 }

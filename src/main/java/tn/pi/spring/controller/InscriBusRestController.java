@@ -58,6 +58,14 @@ public class InscriBusRestController {
 		return inscriBus;
 	}
 
+	// http://localhost:8085/SpringMVC/inscriBus/add-inscriBus
+		@PostMapping("/add-inscriBus1")
+		@ResponseBody
+		public InscriBus addInscriBus1(@RequestBody InscriBus i, Long idBus, Long idEnfant) {
+			InscriBus inscriBus = inscriBusService.addInscriBus1(i,idBus, idEnfant);
+			return inscriBus;
+		}
+	
 	// http://localhost:8085/SpringMVC/inscriBus/remove-inscriBus/{inscriBus-id}
 	@DeleteMapping("/remove-inscriBus/{inscriBusid}")
 	@ResponseBody
@@ -110,6 +118,14 @@ public class InscriBusRestController {
 	    exporter.export(response);
 	     
 	    
+	}
+	
+	
+	@PostMapping("/add-inscri/{idBus}/{idEnfant}")
+	@ResponseBody
+	public void ajouterEtAffecterInscriptionAEnfantetBUS(@RequestBody InscriBus inscription , @PathVariable Long idBus,  @PathVariable Long idEnfant ) {
+		inscriBusService.ajouterEtAffecterInscriptionAEnfantetBUS(inscription, idBus, idEnfant);
+		
 	}
 
 }

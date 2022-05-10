@@ -9,9 +9,9 @@ public interface Ibus {
 	
 	Bus addBus (Bus b);
 
-	Bus addBus (Bus b, Long idTrajet);
+	Bus addBus (Bus b, Long idTrajet, Long idChauffeur);
 	
-	void deleteBus (Long id);
+	void deleteBus (Long idBus);
 
 	Bus updateBus (Bus b);
 

@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 import tn.pi.spring.Iservice.Ibus;
 import tn.pi.spring.entity.Bus;
+import tn.pi.spring.entity.Chauffeur;
 import tn.pi.spring.entity.Trajet;
 import tn.pi.spring.repository.BusRepository;
+import tn.pi.spring.repository.ChauffeurRepository;
 import tn.pi.spring.repository.TrajetRepository;
 
 @Service 
@@ -21,6 +23,9 @@ public class BusService implements Ibus{
 	@Autowired
 	TrajetRepository trajetRepository;
 	private List<Trajet> trajets;
+	
+	@Autowired
+	ChauffeurRepository chaffeurRepository;
 		
 	@Override
 	public List<Bus> retrieveAllBus() {
@@ -39,22 +44,25 @@ public class BusService implements Ibus{
 	}
 
 	@Override
-	public Bus addBus(Bus b, Long idTrajet) {
-		
+	public Bus addBus(Bus b, Long idTrajet, Long idChauffeur) {
+		Chauffeur chauffeur = chaffeurRepository.findById(idChauffeur).get();
 		Trajet trajet= trajetRepository.findById(idTrajet).get();
 		trajets= new ArrayList<Trajet>(); 
 		trajets.add(trajet);
 		b.setTrajets(trajets);
+		b.setChauffeurs(chauffeur);
 		busRepository.save(b);
 		log.info("In method addBus");
 		return b;
 		
 	}
+	
+	
 
 	@Override
-	public void deleteBus(Long id) {
+	public void deleteBus(Long idBus) {
 		log.info("In method deleteBus");
-		busRepository.deleteById(id);
+		busRepository.deleteById(idBus);
 		
 	}
 
@@ -69,6 +77,8 @@ public class BusService implements Ibus{
 		Bus bus = busRepository.findById(id).orElse(null);
 		return bus;
 	}
+
+	
 
 
 }

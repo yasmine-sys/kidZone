@@ -1,6 +1,6 @@
 package tn.pi.spring.entity;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,19 +36,22 @@ public class InscriBus {
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	@Column(name="idInscriBus")
 	private Long idInscriBus;
-	@Column(name="date_inscri_bus")
+	@Temporal(TemporalType.DATE)
 	private Date date_inscri_bus;
 	@Column(name="prix")
 	private float prix;
 	@Enumerated(EnumType.STRING)
 	private Abonnement abonnement;
 	
+	@JsonIgnore
 	@ManyToOne
 	Enfant enfants;
 	
+	@JsonIgnore
 	@ManyToOne
 	Bus buss;
 	
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	Trajet trajet;
 

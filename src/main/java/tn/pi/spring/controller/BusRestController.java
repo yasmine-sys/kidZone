@@ -56,17 +56,17 @@ public class BusRestController {
 				}
 
 		// http://localhost:8089/SpringMVC/bus/add-bus/{idTrajet}
-		@PostMapping("/add-bus/{idTrajet}")
+		@PostMapping("/add-bus/{idTrajet}/{idChauffeur}")
 		@ResponseBody
-		public Bus addBus(@RequestBody Bus b,@PathVariable("idTrajet") Long idTrajet) {
-			Bus bus = busService.addBus(b,idTrajet);
+		public Bus addBus(@RequestBody Bus b,@PathVariable("idTrajet") Long idTrajet,@PathVariable("idChauffeur") Long idChauffeur) {
+			Bus bus = busService.addBus(b,idTrajet,idChauffeur);
 			return bus;
 		}
 
 		// http://localhost:8089/SpringMVC/bus/remove-bus/{bus-id}
-		@DeleteMapping("/remove-bus/{bus-id}")
+		@DeleteMapping("/remove-bus/{idBus}")
 		@ResponseBody
-		public void removeBus(@PathVariable("bus-id") Long busId) {
+		public void removeBus(@PathVariable("idBus") Long busId) {
 			busService.deleteBus(busId);
 		}
 
@@ -76,4 +76,6 @@ public class BusRestController {
 		public Bus modifyBus(@RequestBody Bus bus) {
 			return busService.updateBus(bus);
 		}
+		
+	
 }
