@@ -65,5 +65,13 @@ public class EnfantRestController {
 	public Enfant modifyEnfant(@RequestBody Enfant enfant) {
 		return enfantService.updateEnfant(enfant);
 	}
+	
+	//afficher villeEnfant By idEnfant 
+		// http://localhost:8085/SpringMVC/inscriBus/getNombreEnfantsInscriByBusJPQL{idBus}
+		@GetMapping("/afficherVilleEnfantByIdEnfant/{idEnfant}")
+		@ResponseBody
+		public String afficherVilleEnfantByIdEnfant(@PathVariable("idEnfant") Long idEnfant) {
+			return enfantService.afficherVilleEnfantByIdEnfant(idEnfant);
+				}
 
 }

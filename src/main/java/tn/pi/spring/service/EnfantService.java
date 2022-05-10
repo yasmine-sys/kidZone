@@ -51,4 +51,10 @@ public class EnfantService implements Ienfant{
 		return enfant;
 	}
 
+	@Override
+	public String afficherVilleEnfantByIdEnfant(Long idEnfant) {
+		return enfantRepository.afficherVilleEnfantByIdEnfant(idEnfant);
+		
+	}
+
 }

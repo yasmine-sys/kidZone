@@ -2,6 +2,7 @@ package tn.pi.spring.Iservice;
 
 import java.util.List;
 
+
 import tn.pi.spring.entity.InscriBus;
 
 public interface IinscriBus {
@@ -24,6 +25,10 @@ public interface IinscriBus {
 	public int getNombreEnfantsInscriByBusJPQL(Long idBus);
 	
 	public void ajouterEtAffecterInscriptionAEnfantetBUS (InscriBus inscription,Long idBus,Long idEnfant);
+	
+	
+	
+	//public List<Trajet> searchTrajet(String word);
 	
 	//List<InscriBus> getTrajetsville(String ville);
 }

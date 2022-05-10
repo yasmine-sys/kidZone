@@ -13,6 +13,7 @@ import tn.pi.spring.Iservice.IinscriBus;
 import tn.pi.spring.entity.Bus;
 import tn.pi.spring.entity.Enfant;
 import tn.pi.spring.entity.InscriBus;
+import tn.pi.spring.entity.Trajet;
 import tn.pi.spring.repository.BusRepository;
 import tn.pi.spring.repository.EnfantRepository;
 import tn.pi.spring.repository.InscriBusRepository;
@@ -125,6 +126,14 @@ public class InscriBusService implements IinscriBus{
 	
 		
 	}
+	
+	
+/*
+	@Override
+	public List<Trajet> searchTrajet(String word) {
+		return (List<Trajet>) inscriBusRepository.searchTrajet(word);
+	}
+	*/
 
 	/*@Override
 	public List<InscriBus> getTrajetsville(String ville) {

@@ -29,5 +29,15 @@ public interface InscriBusRepository extends CrudRepository<InscriBus,Long> {
 		//@Query("SELECT e FROM Trajet e   WHERE   e.enfants.ville=:ville")
 		//List<InscriBus> getTrajetsville(@Param("ville")Long idBus);
 		
-	
+		
+		
+		/*
+		//searchTrajet by ville
+		@Query(value="SELECT * from trajet e where(e.point_1 like %:word%" 
+						+ "OR e.point_2 like %:word%"
+						+ "OR e.point_3 like %:word%"
+						+ "OR e.point_arrivee like %:word%"
+						+ "OR e.point_depart like %:word% )" , nativeQuery =true)
+		public List<Trajet> searchTrajet(@Param("word") String word);
+}*/
 }

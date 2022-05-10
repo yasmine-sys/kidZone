@@ -127,5 +127,12 @@ public class InscriBusRestController {
 		inscriBusService.ajouterEtAffecterInscriptionAEnfantetBUS(inscription, idBus, idEnfant);
 		
 	}
-
+/*
+	@GetMapping("/searchTrajet")
+	@ResponseBody
+	//searchTrajet by ville
+	public List<Trajet> searchTrajet(@RequestBody String word){
+		return inscriBusService.searchTrajet(word);
+	}
+	*/
 }
