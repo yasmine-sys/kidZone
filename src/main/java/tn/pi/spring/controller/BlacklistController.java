@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,15 +20,15 @@ import tn.pi.spring.entity.Blacklist;
 @RestController
 @Api(tags = "Blacklist management")
 @RequestMapping("/blacklist")
-@CrossOrigin(origins = "http://localhost:8089")
+@CrossOrigin(origins = "http://localhost:4200")
 public class BlacklistController {
 	
 	@Autowired
 	IBlacklistService blacklistService;
 	// http://localhost:8089/SpringMVC/blacklist/addUserToBlacklist/
-	@PostMapping("/addUserToBlacklist/{email}")
+	@PostMapping("/addUserToBlacklist")
 	@ResponseBody
-	public void addUserToBlacklist(@PathVariable("email") String email){
+	public void addUserToBlacklist(@RequestBody String email){
 		blacklistService.addUserToBlacklist(email);
 	}
 	

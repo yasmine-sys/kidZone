@@ -42,7 +42,7 @@ public class RegistrationService {
 
 		 boolean isValidEmail = emailValidator.test(request.getEmail());
 
-		 String token ="";
+		 String token;
 		 if (!isValidEmail) {
 			 return"email not found";
 		 }
@@ -88,9 +88,11 @@ public class RegistrationService {
 	        		
 	        		);
 	        passwordTokenRepository.save(resetToken);
-
+	        String front = "http://localhost:4200/reset?token="+token+"&email="+email;
+	        System.out.println(token);
 	        String link = "http://localhost:8089/registration/forgetpassword"+email;
-	        emailSender.send(email, buildEmailReset("User",link));
+	        emailSender.send(email, buildEmailReset("User",link, front));
+	       
 	        return token;
 	    }
 	 @Transactional
@@ -220,7 +222,7 @@ public class RegistrationService {
     }
     
 	
-    private String buildEmailReset(String name, String link) {
+    private String buildEmailReset(String name, String link, String front) {
         return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
                 "\n" +
                 "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" +
@@ -276,7 +278,12 @@ public class RegistrationService {
                 "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
                 "      <td style=\"font-family:Helvetica,Arial,sans-serif;font-size:19px;line-height:1.315789474;max-width:560px\">\n" +
                 "        \n" +
-                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hi " + name + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Thank you for calling us. Please click on the below link to reset your password: </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\"" + link + "\">Activate Now</a> </p></blockquote>\n Link will expire in 15 minutes. <p>See you soon</p>" +
+                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hi " + name 
+                + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Thank you for calling us. "
+                + "Please click on the below link to reset your password: </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\">"
+                + "<p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\"" + link + "\">Activate Now</a> </p>"
+                +"<p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\"" + front + "\">go to front Now</a> </p>"
+                		+ "</blockquote>\n Link will expire in 15 minutes. <p>See you soon</p>" +
                 "        \n" +
                 "      </td>\n" +
                 "      <td width=\"10\" valign=\"middle\"><br></td>\n" +

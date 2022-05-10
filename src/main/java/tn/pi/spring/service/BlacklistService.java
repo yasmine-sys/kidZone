@@ -14,11 +14,11 @@ import tn.pi.spring.repository.BlacklistRepository;
 @Service
 public class BlacklistService implements IBlacklistService{
 
-	@Autowired
-	BlacklistRepository blacklistRepository;
-	
-	@Autowired
-	AppUserRepository userRepository;
+	@Autowired(required = false)
+	private BlacklistRepository blacklistRepository;
+	@Autowired(required = false)
+
+	private AppUserRepository userRepository;
 	
 	@Override
 	public void addUserToBlacklist(String email) {

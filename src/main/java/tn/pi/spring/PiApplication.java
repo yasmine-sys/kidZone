@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -17,24 +18,28 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 //@EnableJpaRepositories("healthchecker")
 //@EnableWebMvc
+//@Configuration
 @SpringBootApplication
 public class PiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PiApplication.class, args);
 	}
-	 @Bean
+	
+	
+	/*@Bean
 	    public WebMvcConfigurer corsConfigurer() 
 	    {
 	        return new WebMvcConfigurer() {
 	            @Override
 	            public void addCorsMappings(CorsRegistry registry) {
-	                registry.addMapping("/**").allowedOrigins("http://localhost:4200");
+	                registry.addMapping("/**")
+	                .allowedOrigins("http://localhost:4200");
 	            }
 	        };
 	    }
 
-	/*@Bean
+	@Bean
 	public CorsFilter corsFilter() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 		corsConfiguration.setAllowCredentials(true);

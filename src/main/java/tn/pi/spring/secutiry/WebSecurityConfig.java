@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,37 +12,42 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.firewall.DefaultHttpFirewall;
-import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lombok.AllArgsConstructor;
-import tn.pi.spring.service.AppUserService;
 
 @Configuration
 @AllArgsConstructor
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
 
 	private final UserDetailsService  userDetailsService;
 	private final BCryptPasswordEncoder  bCryptPasswordEncoder;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
-		/*CustomAuthentificationFilter customAuthentificationFilter = new CustomAuthentificationFilter(authenticationManagerBean());
-		customAuthentificationFilter.setFilterProcessesUrl("/SpringMVC/login");*/
-		// http
+	
+    //http
 	        //.logout()
 	        //.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"));
-	http.csrf().disable();
+	http.cors().and().csrf().disable();
 	http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-	http.authorizeRequests().antMatchers("/registration/**").permitAll(); 
-	http.authorizeRequests().antMatchers("/login/**").permitAll();
-	//http.authorizeRequests().antMatchers(HttpMethod.GET,"/user/getUsers/**").hasAnyAuthority("USER");
-	//http.authorizeRequests().antMatchers(HttpMethod.GET,"/user/findByEmail/**").hasAnyAuthority("Parent");
-	//http.authorizeRequests().anyRequest().authenticated();
-    //http.addFilter(new CustomAuthentificationFilter(authenticationManager()));
-	//http.addFilterBefore(new CustomAuthorizationFilter(),UsernamePasswordAuthenticationFilter.class);
+	http.authorizeRequests().antMatchers("/registration/**", "/login/**").permitAll().and(); 
+	http.authorizeRequests().antMatchers(HttpMethod.GET,"/user/Users").hasAnyAuthority("USER");
+	http.authorizeRequests().antMatchers(HttpMethod.OPTIONS,"/blaclist/**").hasAnyAuthority("USER");
+
+	http.authorizeRequests().anyRequest().authenticated();
+    http.addFilter(new CustomAuthentificationFilter(authenticationManager()));
+	http.addFilterBefore(new CustomAuthorizationFilter(),UsernamePasswordAuthenticationFilter.class);
+	
+	
+	/*http
+	.authorizeRequests()
+    .antMatchers("/registration/**","/user/**")
+    .permitAll()
+    .anyRequest() 
+    .authenticated();
+*/
 	}
 	@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
