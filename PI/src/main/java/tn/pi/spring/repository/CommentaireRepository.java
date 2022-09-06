@@ -1,6 +1,7 @@
 package tn.pi.spring.repository;
 
 
+<<<<<<< Updated upstream
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -8,10 +9,21 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import tn.pi.spring.entity.Commentaire;
 
+=======
+
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import org.springframework.stereotype.Repository;
+
+import tn.pi.spring.entity.Commentaire;
+>>>>>>> Stashed changes
 
 
 
 @Repository
+<<<<<<< Updated upstream
 public interface CommentaireRepository extends JpaRepository<Commentaire, Integer> {
 	
 	@Query(value="SELECT comments.* from commentaire join like_comments on comments.id = like_comments.com_id where pub_id_id = :publicationId GROUP by like_comments.com_id order by COUNT(like_comments.com_id) DESC",nativeQuery=true)
@@ -23,6 +35,9 @@ public interface CommentaireRepository extends JpaRepository<Commentaire, Intege
 	
 	
 	//Collection<Commentaire> findByPublication_Id(final Long publicationId);
+=======
+public interface CommentaireRepository extends JpaRepository<Commentaire, Long> {
+>>>>>>> Stashed changes
 	/*//lister les commentaires by publiation 
 		@Query(value="r.* from publication pb , commentaire r where r.id_publication=pb.id_publication ", nativeQuery =true)
 		public List<Commentaire> getCommentaireByPublication();

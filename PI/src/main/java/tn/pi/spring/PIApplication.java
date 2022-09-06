@@ -11,7 +11,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @EnableWebMvc
 @SpringBootApplication
+<<<<<<< Updated upstream
 @EntityScan( basePackages = {"tn.pi.spring.entity"})
+=======
+
+>>>>>>> Stashed changes
 public class PIApplication {
 
 	public static void main(String[] args) {

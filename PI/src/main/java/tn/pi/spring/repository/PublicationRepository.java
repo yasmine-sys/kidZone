@@ -1,5 +1,6 @@
 package tn.pi.spring.repository;
 
+<<<<<<< Updated upstream
 
 import java.awt.print.Pageable;
 import java.util.Collection;
@@ -21,6 +22,22 @@ public interface PublicationRepository extends JpaRepository<Publication, Intege
 	   Publication findFirstByOrderByIdDesc();
 
 	   
+=======
+import java.sql.Date;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+//AUTHOR ABDESSALEM BENCHRIFA
+import org.springframework.stereotype.Repository;
+
+import tn.pi.spring.entity.Commentaire;
+import tn.pi.spring.entity.Publication;
+
+@Repository
+public interface PublicationRepository extends JpaRepository<Publication, Long> {
+>>>>>>> Stashed changes
 	
 	
 	/*//search
@@ -34,7 +51,11 @@ public List<Publication> searchEvent(@Param("word") String word);
 	*/
 	
 	//nb des publications
+<<<<<<< Updated upstream
 	/*	@Query(value="SELECT count(*) from publication", nativeQuery =true)
+=======
+		@Query(value="SELECT count(*) from publication", nativeQuery =true)
+>>>>>>> Stashed changes
 		public int countPublication();
 		
 		@Query("SELECT c FROM Commentaire c WHERE c.publication.publicationId=:id")

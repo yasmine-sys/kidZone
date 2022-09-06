@@ -2,14 +2,20 @@ package tn.pi.spring.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+<<<<<<< Updated upstream
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+=======
+//AUTHOR ABDESSALEM BENCHRIFA
+import javax.persistence.CascadeType;
+>>>>>>> Stashed changes
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+<<<<<<< Updated upstream
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,6 +25,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
+=======
+>>>>>>> Stashed changes
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,11 +40,16 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+<<<<<<< Updated upstream
 
+=======
+@RequiredArgsConstructor
+>>>>>>> Stashed changes
 public class Commentaire implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+<<<<<<< Updated upstream
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="createdAt",nullable=false,updatable=false)
 	@CreatedDate
@@ -132,3 +145,19 @@ public class Commentaire implements Serializable {
 }
 
 	
+=======
+	@Id
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	private long commentaireId;
+
+	@NonNull private Date dateCreation;
+	private Date dateDerniereModification;
+	@NonNull private String contenuCommentaire;
+	@NonNull private Integer ratingCommentaire;
+	
+
+	@ManyToOne(cascade=CascadeType.ALL)
+	Publication publication;
+
+}
+>>>>>>> Stashed changes

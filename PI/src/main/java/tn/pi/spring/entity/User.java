@@ -2,10 +2,15 @@ package tn.pi.spring.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+<<<<<<< Updated upstream
 import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+=======
+import java.util.List;
+
+>>>>>>> Stashed changes
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,8 +19,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+<<<<<<< Updated upstream
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+=======
+>>>>>>> Stashed changes
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -33,15 +41,21 @@ public class User implements Serializable{
 	@Column(name="id")
 	private Long id;
 	
+<<<<<<< Updated upstream
 	@Column(name="firstName")
 	private String firstName;
 	
 	@Column(name="lastName")
 	private String lastName;
+=======
+	@Column(name="nom")
+	private String nom;
+>>>>>>> Stashed changes
 	
 	@Column(name="Description")
 	private String Description;
 	
+<<<<<<< Updated upstream
 	@Column(name="adress")
 	private String adress;
 	
@@ -90,6 +104,48 @@ public class User implements Serializable{
 		this.publication_id = publication_id;
 	}
 	
+=======
+	@Column(name="nbrEmployee")
+	private Long nbrEmployee;
+	
+
+	@Column(name="dateCreation")
+	private Date dateCreation;
+	
+
+	@Column(name="Tel")
+	private Long Tel;
+	
+
+	@Column(name="Localisation")
+	private String Localisation;
+	
+
+	@Column(name="enfantMax")
+	private Long enfantMax;
+	
+
+	@Column(name="logo")
+	private String logo;
+	
+	@Column(name="mail")
+	private String mail;
+	
+	@Column(name="passwd")
+	private String passwd;
+
+	@Column(name="Prenom")
+	private String Prenom;
+
+	@Column(name="photo")
+	private String photo;
+	
+	@Column(name="nbrEnfant")
+	private Long nbrEnfant;
+	
+//	@OneToMany(mappedBy = "UserPubication")
+//	private  List <Publication> Publications;
+>>>>>>> Stashed changes
 	
 
 }

@@ -1,5 +1,6 @@
 package tn.pi.spring.services;
 
+<<<<<<< Updated upstream
 
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,17 @@ import tn.pi.spring.repository.CommentaireRepository;
 import tn.pi.spring.repository.LikesCommentaireRepository;
 import tn.pi.spring.repository.PublicationRepository;
 import tn.pi.spring.repository.UserRepository;
+=======
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import lombok.extern.slf4j.Slf4j;
+import tn.pi.spring.entity.Commentaire;
+import tn.pi.spring.entity.Publication;
+import tn.pi.spring.repository.CommentaireRepository;
+>>>>>>> Stashed changes
 
 @Service
 @Slf4j
@@ -24,6 +36,7 @@ public class CommentaireServiceImpl implements CommentaireService {
 	@Autowired
 	CommentaireRepository commentaireRepository;
 	
+<<<<<<< Updated upstream
 	@Autowired
 	LikesCommentaireRepository lcomments_rep;
 	
@@ -56,6 +69,8 @@ public class CommentaireServiceImpl implements CommentaireService {
 	
 	
 	
+=======
+>>>>>>> Stashed changes
 	@Override
 	public List<Commentaire> retrievAllCommentaires() {
 		List<Commentaire> commentaires = null;
@@ -76,11 +91,18 @@ public class CommentaireServiceImpl implements CommentaireService {
 		//return null;
 	}
 
+<<<<<<< Updated upstream
 	/*@Override
 	public Commentaire addCommentaire(Commentaire c) {
 		return commentaireRepository.save(c);
 	}
 	*/
+=======
+	@Override
+	public Commentaire addCommentaire(Commentaire c) {
+		return commentaireRepository.save(c);
+	}
+>>>>>>> Stashed changes
 
 	@Override
 	public Commentaire updateCommentaire(Commentaire c) {
@@ -90,13 +112,18 @@ public class CommentaireServiceImpl implements CommentaireService {
 	}
 
 	@Override
+<<<<<<< Updated upstream
 	public Commentaire retrieveCommentaire(int id) {
+=======
+	public Commentaire retrieveCommentaire(Long id) {
+>>>>>>> Stashed changes
 		// TODO Auto-generated method stub
 		//return null;
 		return (commentaireRepository.findById(id).get());
 	}
 
 	@Override
+<<<<<<< Updated upstream
 	public void deleteCommentaire(int id) {
 		commentaireRepository.deleteById(id);		
 	}
@@ -106,12 +133,19 @@ public class CommentaireServiceImpl implements CommentaireService {
 		 return commentaireRepository.findById(id);
 	}
 
+=======
+	public void deleteCommentaire(Long id) {
+		commentaireRepository.deleteById(id);		
+	}
+
+>>>>>>> Stashed changes
 /*	@Override
 	public List<Publication> findPublication(Long id) {
 		return (List<Publication>) commentaireRepository.findPublication(id);
 	}
 	
 */	
+<<<<<<< Updated upstream
 	
 	
 	@Override
@@ -242,6 +276,8 @@ public class CommentaireServiceImpl implements CommentaireService {
 		}
 		
 	}
+=======
+>>>>>>> Stashed changes
 
 
 }
